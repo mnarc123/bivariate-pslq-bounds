@@ -101,3 +101,5 @@ Total computation time: 8 hours 27 minutes (1331 PSLQ runs).
 Code: [MIT License](LICENSE)
 
 Paper: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+[![DOI](https://zenodo.org/badge/1161208505.svg)](https://doi.org/10.5281/zenodo.18686238)
