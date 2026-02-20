@@ -1,9 +1,9 @@
 """
-Calcolo e caching delle costanti matematiche fondamentali.
+Computation and caching of fundamental mathematical constants.
 
-PRINCIPIO DI RIGORE: ogni costante è calcolata con DUE metodi indipendenti
-quando possibile, e i risultati sono confrontati per verificare la correttezza.
-Le costanti vengono salvate su disco per evitare ricalcoli.
+RIGOR PRINCIPLE: each constant is computed using TWO independent methods
+when possible, and the results are compared to verify correctness.
+Constants are saved to disk to avoid recomputation.
 """
 
 import mpmath
@@ -15,7 +15,7 @@ from config import SearchConfig
 
 
 class ConstantsComputer:
-    """Calcola e gestisce costanti matematiche ad alta precisione."""
+    """Computes and manages high-precision mathematical constants."""
 
     def __init__(self, config: SearchConfig):
         self.config = config
@@ -23,16 +23,16 @@ class ConstantsComputer:
 
     def compute_all(self, precision: int, names: list) -> Dict[str, mpmath.mpf]:
         """
-        Calcola tutte le costanti richieste alla precisione data.
+        Compute all requested constants at the given precision.
 
         Args:
-            precision: numero di cifre decimali
-            names: lista di nomi di costanti (da config)
+            precision: number of decimal digits
+            names: list of constant names (from config)
 
         Returns:
-            Dizionario nome -> valore mpf
+            Dictionary name -> mpf value
         """
-        mpmath.mp.dps = precision + 50  # margine extra per errori di arrotondamento
+        mpmath.mp.dps = precision + 50  # extra margin for rounding errors
 
         result = {}
         for name in names:
@@ -43,13 +43,13 @@ class ConstantsComputer:
         return result
 
     def _compute_single(self, name: str, precision: int) -> mpmath.mpf:
-        """Calcola una singola costante con verifica."""
+        """Compute a single constant with verification."""
 
         cache_key = f"{name}_{precision}"
         if cache_key in self._cache:
             return self._cache[cache_key]
 
-        # Controlla cache su disco
+        # Check disk cache
         cache_file = self.config.cache_dir / f"{name}_{precision}.txt"
         if cache_file.exists():
             mpmath.mp.dps = precision + 50
@@ -60,7 +60,7 @@ class ConstantsComputer:
         mpmath.mp.dps = precision + 50
         value = self._compute_constant(name)
 
-        # Salva in cache
+        # Save to cache
         cache_file.write_text(mpmath.nstr(value, precision + 10))
         self._cache[cache_key] = value
 
@@ -68,13 +68,13 @@ class ConstantsComputer:
 
     def _compute_constant(self, name: str) -> mpmath.mpf:
         """
-        Calcola la costante con il metodo appropriato.
+        Compute the constant using the appropriate method.
 
-        NOTA: mpmath calcola internamente queste costanti usando algoritmi
-        con convergenza dimostrata. La precisione è garantita dalla libreria.
+        NOTE: mpmath internally computes these constants using algorithms
+        with proven convergence. Precision is guaranteed by the library.
         """
         CONSTANTS = {
-            # --- Livello 1 ---
+            # --- Level 1 ---
             "pi":          lambda: mpmath.pi,
             "e":           lambda: mpmath.e,
             "euler_gamma": lambda: mpmath.euler,
@@ -82,7 +82,7 @@ class ConstantsComputer:
             "ln2":         lambda: mpmath.log(2),
             "sqrt2":       lambda: mpmath.sqrt(2),
 
-            # --- Livello 2 ---
+            # --- Level 2 ---
             "zeta3":       lambda: mpmath.zeta(3),
             "catalan":     lambda: mpmath.catalan,
             "sqrt3":       lambda: mpmath.sqrt(3),
@@ -92,7 +92,7 @@ class ConstantsComputer:
             "ln10":        lambda: mpmath.log(10),
             "pi2":         lambda: mpmath.pi ** 2,
 
-            # --- Livello 3 ---
+            # --- Level 3 ---
             "zeta5":       lambda: mpmath.zeta(5),
             "khinchin":    lambda: mpmath.khinchin,
             "glaisher":    lambda: mpmath.glaisher,
@@ -110,63 +110,63 @@ class ConstantsComputer:
         }
 
         if name not in CONSTANTS:
-            raise ValueError(f"Costante sconosciuta: {name}")
+            raise ValueError(f"Unknown constant: {name}")
 
         return CONSTANTS[name]()
 
     def verify_known_relations(self) -> bool:
         """
-        SELF-TEST CRITICO: verifica relazioni note per assicurare
-        che le costanti siano calcolate correttamente.
+        CRITICAL SELF-TEST: verify known relations to ensure
+        that constants are computed correctly.
 
-        Se anche una sola di queste fallisce, c'è un errore nel calcolo
-        e TUTTI i risultati della ricerca sarebbero invalidi.
+        If even one of these fails, there is a computation error
+        and ALL search results would be invalid.
         """
-        print("=== VERIFICA RELAZIONI NOTE ===")
+        print("=== VERIFICATION OF KNOWN RELATIONS ===")
         mpmath.mp.dps = self.config.working_precision + 50
         tests_passed = True
 
-        # Test 1: e^(iπ) + 1 = 0 (Identità di Eulero)
+        # Test 1: e^(iπ) + 1 = 0 (Euler's identity)
         val = abs(mpmath.exp(1j * mpmath.pi) + 1)
         ok = val < mpmath.mpf(10) ** (-self.config.working_precision + 10)
-        print(f"  e^(iπ) + 1 = {mpmath.nstr(val, 5)}  {'✓' if ok else '✗ ERRORE!'}")
+        print(f"  e^(iπ) + 1 = {mpmath.nstr(val, 5)}  {'✓' if ok else '✗ ERROR!'}")
         tests_passed &= ok
 
         # Test 2: ζ(2) = π²/6
         val = abs(mpmath.zeta(2) - mpmath.pi**2 / 6)
         ok = val < mpmath.mpf(10) ** (-self.config.working_precision + 10)
-        print(f"  ζ(2) - π²/6 = {mpmath.nstr(val, 5)}  {'✓' if ok else '✗ ERRORE!'}")
+        print(f"  ζ(2) - π²/6 = {mpmath.nstr(val, 5)}  {'✓' if ok else '✗ ERROR!'}")
         tests_passed &= ok
 
         # Test 3: φ² - φ - 1 = 0
         phi = (1 + mpmath.sqrt(5)) / 2
         val = abs(phi**2 - phi - 1)
         ok = val < mpmath.mpf(10) ** (-self.config.working_precision + 10)
-        print(f"  φ² - φ - 1 = {mpmath.nstr(val, 5)}  {'✓' if ok else '✗ ERRORE!'}")
+        print(f"  φ² - φ - 1 = {mpmath.nstr(val, 5)}  {'✓' if ok else '✗ ERROR!'}")
         tests_passed &= ok
 
-        # Test 4: ln(2) = 1 - 1/2 + 1/3 - 1/4 + ... (verifica numerica)
-        val = abs(mpmath.log(2) - mpmath.log(2))  # tautologico, ma verifica la coerenza
+        # Test 4: ln(2) consistency check (tautological, but verifies coherence)
+        val = abs(mpmath.log(2) - mpmath.log(2))
         ok = val == 0
-        print(f"  ln(2) coerenza = {val}  {'✓' if ok else '✗ ERRORE!'}")
+        print(f"  ln(2) consistency = {val}  {'✓' if ok else '✗ ERROR!'}")
         tests_passed &= ok
 
-        # Test 5: PSLQ ritrova relazione nota: π² = 6·ζ(2)
-        # Questo testa anche che PSLQ funzioni correttamente
+        # Test 5: PSLQ recovers known relation: π² = 6·ζ(2)
+        # This also tests that PSLQ is functioning correctly
         vec = [mpmath.pi**2, mpmath.zeta(2)]
         rel = mpmath.pslq(vec)
         ok = rel is not None and rel == [1, -6]
-        print(f"  PSLQ(π², ζ(2)) = {rel}  {'✓' if ok else '✗ ERRORE!'}")
+        print(f"  PSLQ(π², ζ(2)) = {rel}  {'✓' if ok else '✗ ERROR!'}")
         tests_passed &= ok
 
-        # Test 6: PSLQ ritrova φ² = φ + 1
+        # Test 6: PSLQ recovers φ² = φ + 1
         vec = [phi**2, phi, mpmath.mpf(1)]
         rel = mpmath.pslq(vec)
         ok = rel is not None and (
             rel == [1, -1, -1] or rel == [-1, 1, 1]
         )
-        print(f"  PSLQ(φ², φ, 1) = {rel}  {'✓' if ok else '✗ ERRORE!'}")
+        print(f"  PSLQ(φ², φ, 1) = {rel}  {'✓' if ok else '✗ ERROR!'}")
         tests_passed &= ok
 
-        print(f"\n  {'TUTTI I TEST SUPERATI ✓' if tests_passed else 'ERRORI RILEVATI ✗ — INTERROMPERE!'}")
+        print(f"\n  {'ALL TESTS PASSED ✓' if tests_passed else 'ERRORS DETECTED ✗ — ABORT!'}")
         return tests_passed

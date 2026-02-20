@@ -1,9 +1,9 @@
 """
-Gestione della precisione multi-livello.
+Multi-level precision management.
 
-STRATEGIA: Per ogni coppia e grado, calcola la precisione minima necessaria,
-poi aggiungi un margine di sicurezza. Usa una strategia "a scaletta":
-prima testa a precisione moderata, poi se serve aumenta.
+STRATEGY: For each pair and degree, compute the minimum required precision,
+then add a safety margin. Uses a "staircase" strategy:
+first test at moderate precision, then increase if needed.
 """
 
 import math
@@ -14,20 +14,20 @@ from typing import Tuple
 
 @dataclass
 class PrecisionPlan:
-    """Piano di precisione per una ricerca PSLQ."""
+    """Precision plan for a PSLQ search."""
     n_monomials: int
-    max_coeff_digits: int       # D: log10 della norma max dei coefficienti
-    working_digits: int         # cifre di lavoro per PSLQ
-    verification_digits: int    # cifre per verifica indipendente
-    is_feasible: bool           # True se il calcolo è fattibile in tempo ragionevole
-    estimated_hours: float      # stima del tempo in ore
+    max_coeff_digits: int       # D: log10 of the max coefficient norm
+    working_digits: int         # working digits for PSLQ
+    verification_digits: int    # digits for independent verification
+    is_feasible: bool           # True if computation is feasible in reasonable time
+    estimated_hours: float      # estimated time in hours
 
 
-# Parametro di calibrazione globale — calibrato da benchmark reale
-# su i7-12700F con mpmath PSLQ, 2026-02-18.
-# Modello: T(ore) ≈ k · N^alpha · P^beta
-# dove N = n_monomials, P = working_digits
-# Benchmark (π,e): grado 10-20, errore <1% su tutti i punti.
+# Global calibration parameter — calibrated from real benchmark
+# on i7-12700F with mpmath PSLQ, 2026-02-18.
+# Model: T(hours) ≈ k · N^alpha · P^beta
+# where N = n_monomials, P = working_digits
+# Benchmark (π,e): degree 10-20, error <1% on all data points.
 CALIBRATION_K = 2.575159e-10
 CALIBRATION_ALPHA = 1.362
 CALIBRATION_BETA = 1.5
@@ -40,30 +40,30 @@ def compute_precision_plan(
     max_hours: float = 48.0,
 ) -> PrecisionPlan:
     """
-    Calcola il piano di precisione ottimale per una coppia a un dato grado.
+    Compute the optimal precision plan for a pair at a given degree.
 
     Args:
-        degree: grado massimo del polinomio
-        max_coeff: norma massima dei coefficienti
-        safety_factor: moltiplicatore di sicurezza sulla precisione
-        max_hours: tempo massimo consentito in ore
+        degree: maximum polynomial degree
+        max_coeff: maximum coefficient norm
+        safety_factor: safety multiplier on precision
+        max_hours: maximum allowed time in hours
 
     Returns:
-        PrecisionPlan con tutti i parametri calcolati
+        PrecisionPlan with all computed parameters
     """
     n_monomials = (degree + 1) * (degree + 2) // 2
     max_coeff_digits = max(1, math.ceil(math.log10(max_coeff + 1)))
 
-    # Precisione minima: N × D (regola di Bailey)
+    # Minimum precision: N × D (Bailey's rule)
     min_digits = n_monomials * max_coeff_digits
 
-    # Precisione di lavoro con margine di sicurezza
+    # Working precision with safety margin
     working_digits = int(min_digits * safety_factor)
 
-    # Precisione di verifica: almeno 1.5x la working
+    # Verification precision: at least 1.5x the working precision
     verification_digits = int(working_digits * 1.5)
 
-    # Stima del tempo
+    # Time estimate
     estimated_hours = (
         CALIBRATION_K
         * (n_monomials ** CALIBRATION_ALPHA)
@@ -88,8 +88,8 @@ def find_max_feasible_degree(
     safety_factor: float = 2.0,
 ) -> int:
     """
-    Trova il grado massimo fattibile per una coppia bivariata.
-    Fa una ricerca binaria sul grado.
+    Find the maximum feasible degree for a bivariate pair.
+    Uses binary search on the degree.
     """
     lo, hi = 8, 200
     best = lo
@@ -106,22 +106,22 @@ def find_max_feasible_degree(
 
 def calibrate_from_benchmarks(benchmark_data: list):
     """
-    Calibra i parametri k, alpha, beta dai dati di benchmark.
+    Calibrate parameters k, alpha, beta from benchmark data.
 
-    benchmark_data: lista di (n_monomials, working_digits, elapsed_seconds)
+    benchmark_data: list of (n_monomials, working_digits, elapsed_seconds)
     """
     global CALIBRATION_K, CALIBRATION_ALPHA, CALIBRATION_BETA
 
     if len(benchmark_data) < 2:
-        # Con un solo punto, aggiusta solo k mantenendo alpha e beta
+        # With a single data point, adjust only k while keeping alpha and beta
         if benchmark_data:
             n, p, t = benchmark_data[0]
             t_hours = t / 3600.0
             CALIBRATION_K = t_hours / (n ** CALIBRATION_ALPHA * p ** CALIBRATION_BETA)
         return
 
-    # Con più punti, fit log-lineare: log(T) = log(k) + alpha*log(N) + beta*log(P)
-    # Semplificazione: se P è costante tra i benchmark, fit solo su N
+    # With multiple points, log-linear fit: log(T) = log(k) + alpha*log(N) + beta*log(P)
+    # Simplification: if P is constant across benchmarks, fit only on N
     import numpy as np
 
     log_n = np.array([math.log(d[0]) for d in benchmark_data])
@@ -137,7 +137,7 @@ def calibrate_from_benchmarks(benchmark_data: list):
         CALIBRATION_ALPHA = c1
         CALIBRATION_BETA = c2
     except Exception:
-        # Fallback: usa solo il punto più grande
+        # Fallback: use only the largest data point
         n, p, t = max(benchmark_data, key=lambda x: x[0])
         t_hours = t / 3600.0
         CALIBRATION_K = t_hours / (n ** CALIBRATION_ALPHA * p ** CALIBRATION_BETA)

@@ -1,11 +1,11 @@
 """
-Generatore di monomiali multivariati per la ricerca PSLQ.
+Multivariate monomial generator for PSLQ search.
 
-Data una lista di costanti [c₁, c₂, ..., cₘ] e un grado massimo d,
-genera tutti i monomiali c₁^a₁ · c₂^a₂ · ... · cₘ^aₘ con Σaᵢ ≤ d.
+Given a list of constants [c₁, c₂, ..., cₘ] and a maximum degree d,
+generates all monomials c₁^a₁ · c₂^a₂ · ... · cₘ^aₘ with Σaᵢ ≤ d.
 
-NOTA: l'inclusione del termine costante "1" (tutti gli esponenti zero)
-è ESSENZIALE — senza di esso non si trovano relazioni affini (con termine noto).
+NOTE: inclusion of the constant term "1" (all exponents zero)
+is ESSENTIAL — without it, affine relations (with a constant term) cannot be found.
 """
 
 from itertools import combinations_with_replacement
@@ -15,24 +15,24 @@ import mpmath
 
 def generate_exponent_tuples(n_vars: int, max_degree: int) -> List[Tuple[int, ...]]:
     """
-    Genera tutte le tuple di esponenti (a₁, ..., aₙ) con Σaᵢ ≤ max_degree.
+    Generate all exponent tuples (a₁, ..., aₙ) with Σaᵢ ≤ max_degree.
 
-    Usa il metodo "stars and bars" per enumerare efficacemente.
+    Uses the "stars and bars" method for efficient enumeration.
 
     Returns:
-        Lista di tuple, ciascuna di lunghezza n_vars.
-        La prima tupla è sempre (0, 0, ..., 0) — il termine costante "1".
+        List of tuples, each of length n_vars.
+        The first tuple is always (0, 0, ..., 0) — the constant term "1".
     """
     tuples = []
     for total_degree in range(max_degree + 1):
-        # Genera tutte le partizioni di total_degree in n_vars parti non-negative
+        # Generate all partitions of total_degree into n_vars non-negative parts
         for combo in _partitions(total_degree, n_vars):
             tuples.append(combo)
     return tuples
 
 
 def _partitions(total: int, n_parts: int) -> List[Tuple[int, ...]]:
-    """Genera tutte le composizioni deboli di 'total' in 'n_parts' parti."""
+    """Generate all weak compositions of 'total' into 'n_parts' parts."""
     if n_parts == 1:
         return [(total,)]
     result = []
@@ -49,27 +49,27 @@ def compute_monomial_values(
     max_monomials: int = 80
 ) -> Tuple[List[mpmath.mpf], List[Tuple[int, ...]], List[str]]:
     """
-    Calcola i valori numerici di tutti i monomiali.
+    Compute the numerical values of all monomials.
 
     Args:
-        constant_values: dizionario nome -> valore mpf
-        constant_names: nomi delle costanti da usare (ordine fisso)
-        max_degree: grado massimo
-        max_monomials: numero massimo di monomiali (per controllare i tempi PSLQ)
+        constant_values: dictionary name -> mpf value
+        constant_names: names of constants to use (fixed order)
+        max_degree: maximum degree
+        max_monomials: maximum number of monomials (to control PSLQ runtime)
 
     Returns:
-        - values: lista di valori mpf dei monomiali
-        - exponents: lista delle tuple di esponenti corrispondenti
-        - labels: lista di stringhe leggibili (es. "π²·e·γ")
+        - values: list of mpf monomial values
+        - exponents: list of corresponding exponent tuples
+        - labels: list of human-readable strings (e.g. "π²·e·γ")
 
-    NOTA: Il primo valore è sempre 1 (termine costante).
+    NOTE: The first value is always 1 (constant term).
     """
     n_vars = len(constant_names)
     all_exponents = generate_exponent_tuples(n_vars, max_degree)
 
     if len(all_exponents) > max_monomials:
-        # Strategia: dare priorità ai gradi bassi e ai monomiali "misti"
-        # (prodotti di costanti diverse, che sono più probabilmente inesplorati)
+        # Strategy: prioritize low degrees and "mixed" monomials
+        # (products of different constants, which are more likely unexplored)
         all_exponents = _prioritize_exponents(all_exponents, max_monomials)
 
     values = []
@@ -96,14 +96,14 @@ def _prioritize_exponents(
     exponents: List[Tuple[int, ...]], max_count: int
 ) -> List[Tuple[int, ...]]:
     """
-    Prioritizza monomiali: prima grado basso, poi monomiali "misti"
-    (con più variabili coinvolte), poi grado alto.
+    Prioritize monomials: low degree first, then "mixed" monomials
+    (involving more variables), then high degree.
     """
     def sort_key(exp_tuple):
         total_deg = sum(exp_tuple)
         n_nonzero = sum(1 for e in exp_tuple if e > 0)
         max_single = max(exp_tuple) if exp_tuple else 0
-        # Priorità: grado basso, molte variabili coinvolte, esponenti bassi
+        # Priority: low degree, many variables involved, low exponents
         return (total_deg, -n_nonzero, max_single)
 
     sorted_exp = sorted(exponents, key=sort_key)
@@ -112,8 +112,8 @@ def _prioritize_exponents(
 
 def count_monomials(n_vars: int, max_degree: int) -> int:
     """
-    Calcola il numero totale di monomiali C(n_vars + max_degree, max_degree).
-    Utile per stimare la dimensione dello spazio di ricerca.
+    Compute the total number of monomials C(n_vars + max_degree, max_degree).
+    Useful for estimating the search space size.
     """
     from math import comb
     return comb(n_vars + max_degree, max_degree)

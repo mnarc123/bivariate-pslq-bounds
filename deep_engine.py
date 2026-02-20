@@ -1,26 +1,26 @@
 """
-Motore di ricerca profonda per relazioni polinomiali bivariate.
+Deep search engine for bivariate polynomial relations.
 
-Questo modulo esegue PSLQ sulle coppie di costanti trascendenti
-spingendo fino al grado massimo consentito dal budget di tempo.
+This module runs PSLQ on pairs of transcendental constants,
+pushing to the maximum degree allowed by the time budget.
 
-ALGORITMO PER OGNI COPPIA (α, β):
-1. Calcola grado massimo fattibile dato il budget di tempo
-2. Per ogni grado d da 9 fino al massimo (incrementale):
-   a. Genera il vettore dei monomiali [1, α, β, α², αβ, β², ..., β^d]
-   b. Calcola i valori a precisione adeguata (N×D×safety cifre)
-   c. Esegui PSLQ con maxcoeff=100 (prima relazioni "eleganti")
-   d. Se nessun risultato: esegui PSLQ con maxcoeff=10000
-   e. Se nessun risultato: esegui PSLQ con maxcoeff=10^6
-   f. Log del bound stabilito a questo grado
+ALGORITHM FOR EACH PAIR (α, β):
+1. Compute the maximum feasible degree given the time budget
+2. For each degree d from 9 up to the maximum (incremental):
+   a. Generate the monomial vector [1, α, β, α², αβ, β², ..., β^d]
+   b. Compute values at adequate precision (N×D×safety digits)
+   c. Run PSLQ with maxcoeff=100 ("elegant" relations first)
+   d. If no result: run PSLQ with maxcoeff=10000
+   e. If no result: run PSLQ with maxcoeff=10^6
+   f. Log the bound established at this degree
    g. Checkpoint
-3. Verifica eventuale relazione trovata a precisione doppia
+3. Verify any found relation at double precision
 
-STRATEGIA INCREMENTALE:
-- Partiamo dal grado 9 (dove la Fase 1 si è fermata)
-- Incrementiamo di 1 in 1 fino al grado massimo
-- Questo permette di interrompere in qualsiasi momento con risultati parziali
-- I checkpoint garantiscono che non si ripeta lavoro già fatto
+INCREMENTAL STRATEGY:
+- We start from degree 9 (where Phase 1 left off)
+- We increment by 1 up to the maximum degree
+- This allows interruption at any point with partial results
+- Checkpoints ensure that completed work is not repeated
 """
 
 import mpmath
@@ -28,6 +28,7 @@ import sympy
 import time
 import json
 import sys
+from pslq_bounds import pslq_bound, PSLQResult
 from typing import List, Tuple, Dict, Optional
 from pathlib import Path
 from dataclasses import dataclass, asdict
@@ -39,7 +40,7 @@ from checkpoint import CheckpointManager
 from bound_calculator import format_bound_statement, compute_search_space_size
 
 
-# === DEFINIZIONE DELLE COPPIE ===
+# === PAIR DEFINITIONS ===
 
 TOP_PAIRS = [
     ("pi", "e"),
@@ -72,7 +73,7 @@ MEDIUM_PAIRS = [
 
 @dataclass
 class DeepSearchResult:
-    """Risultato di una singola ricerca profonda."""
+    """Result of a single deep search run."""
     pair: Tuple[str, str]
     degree: int
     max_coeff: int
@@ -85,9 +86,12 @@ class DeepSearchResult:
     bound_statement: str
     elapsed_seconds: float
     timestamp: str
+    norm_bound: Optional[int] = None
+    norm_bound_allH: Optional[int] = None
+    pslq_iterations: Optional[int] = None
 
 
-# Mappa costanti → simboli sympy per verifica banalità
+# Map constants → sympy symbols for triviality checking
 _SYMPY_CONSTANTS = {
     "pi": sympy.pi,
     "e": sympy.E,
@@ -115,21 +119,21 @@ def generate_bivariate_monomials(
     degree: int,
 ) -> Tuple[List[mpmath.mpf], List[Tuple[int, int]], List[str]]:
     """
-    Genera tutti i monomiali α^i · β^j con i+j ≤ degree.
+    Generate all monomials α^i · β^j with i+j ≤ degree.
 
-    Ordine: grado totale crescente, poi i crescente dentro ogni grado.
-    Il primo elemento è sempre 1 (i=0, j=0).
+    Order: increasing total degree, then increasing i within each degree.
+    The first element is always 1 (i=0, j=0).
 
     Returns:
-        values: valori numerici dei monomiali
-        exponents: lista di (i, j)
-        labels: stringhe leggibili
+        values: numerical values of the monomials
+        exponents: list of (i, j)
+        labels: human-readable strings
     """
     values = []
     exponents = []
     labels = []
 
-    # Precomputa le potenze
+    # Precompute powers
     alpha_powers = [mpmath.mpf(1)]
     beta_powers = [mpmath.mpf(1)]
     for k in range(1, degree + 1):
@@ -143,7 +147,7 @@ def generate_bivariate_monomials(
             values.append(val)
             exponents.append((i, j))
 
-            # Etichetta leggibile
+            # Human-readable label
             parts = []
             if i > 0:
                 if i == 1:
@@ -169,8 +173,8 @@ def check_relation_trivial_sympy(
     const2: str,
 ) -> bool:
     """
-    Verifica se una relazione trovata è banale usando sympy.
-    Restituisce True se sympy riesce a semplificare a zero.
+    Check whether a found relation is trivial using sympy.
+    Returns True if sympy can simplify it to zero.
     """
     if const1 not in _SYMPY_CONSTANTS or const2 not in _SYMPY_CONSTANTS:
         return False
@@ -199,7 +203,7 @@ def check_relation_trivial_sympy(
 
 
 class DeepSearchEngine:
-    """Motore di ricerca profonda."""
+    """Deep search engine."""
 
     def __init__(self, config: SearchConfig, max_hours_per_pair: float = 24.0):
         self.config = config
@@ -219,7 +223,7 @@ class DeepSearchEngine:
         self.deep_dir = deep_dir
 
     def log(self, msg: str):
-        """Log a file e console."""
+        """Log to file and console."""
         timestamp = time.strftime("%H:%M:%S")
         line = f"[{timestamp}] {msg}"
         print(line, flush=True)
@@ -227,38 +231,38 @@ class DeepSearchEngine:
             f.write(line + "\n")
 
     def get_constant_value(self, name: str, digits: int) -> mpmath.mpf:
-        """Recupera o calcola una costante alla precisione data."""
+        """Retrieve or compute a constant at the given precision."""
         all_vals = self.constants_computer.compute_all(digits, [name])
         return all_vals[name]
 
     def run(self, pair_filter: Optional[str] = None):
-        """Esecuzione principale della ricerca profonda."""
+        """Main execution of the deep search."""
         self.log("=" * 70)
-        self.log("  EQUAZIONE PONTE — Fase 2: Ricerca Profonda ad Alto Grado")
+        self.log("  BRIDGE EQUATION — Phase 2: High-Degree Deep Search")
         self.log("=" * 70)
 
         # === SELF-TEST ===
-        self.log("\n[SELF-TEST] Verifica PSLQ su relazione nota φ²-φ-1=0...")
+        self.log("\n[SELF-TEST] Verifying PSLQ on known relation φ²-φ-1=0...")
         mpmath.mp.dps = 200
         phi = (1 + mpmath.sqrt(5)) / 2
         rel = mpmath.pslq([phi**2, phi, mpmath.mpf(1)])
         if rel is None or (rel != [1, -1, -1] and rel != [-1, 1, 1]):
-            self.log(f"  ✗ ERRORE: PSLQ restituisce {rel}! Interruzione.")
+            self.log(f"  ✗ ERROR: PSLQ returns {rel}! Aborting.")
             return
-        self.log("  ✓ PSLQ funzionante.")
+        self.log("  ✓ PSLQ operational.")
 
         # === SELF-TEST 2: ζ(2) = π²/6 ===
-        self.log("[SELF-TEST] Verifica PSLQ su ζ(2) - π²/6 = 0...")
+        self.log("[SELF-TEST] Verifying PSLQ on ζ(2) - π²/6 = 0...")
         mpmath.mp.dps = 200
         rel2 = mpmath.pslq([mpmath.zeta(2), mpmath.pi**2])
         if rel2 is None or (rel2 != [6, -1] and rel2 != [-6, 1]):
-            self.log(f"  ✗ ERRORE: PSLQ restituisce {rel2}! Interruzione.")
+            self.log(f"  ✗ ERROR: PSLQ returns {rel2}! Aborting.")
             return
-        self.log("  ✓ PSLQ funzionante.")
+        self.log("  ✓ PSLQ operational.")
 
-        # === PIANIFICAZIONE ===
-        self.log(f"\n[PIANIFICAZIONE] Budget: {self.max_hours_per_pair:.1f}h per coppia")
-        self.log(f"  Checkpoint completati: {self.checkpoint.get_completed_count()}")
+        # === PLANNING ===
+        self.log(f"\n[PLANNING] Budget: {self.max_hours_per_pair:.1f}h per pair")
+        self.log(f"  Completed checkpoints: {self.checkpoint.get_completed_count()}")
 
         all_pairs = (
             [(p, "top") for p in TOP_PAIRS]
@@ -266,20 +270,20 @@ class DeepSearchEngine:
             + [(p, "medium") for p in MEDIUM_PAIRS]
         )
 
-        # Filtra se richiesto
+        # Filter if requested
         if pair_filter:
             all_pairs = [
                 (p, pri) for p, pri in all_pairs
                 if f"{p[0]}+{p[1]}" == pair_filter
             ]
             if not all_pairs:
-                self.log(f"  ⚠ Coppia '{pair_filter}' non trovata!")
+                self.log(f"  ⚠ Pair '{pair_filter}' not found!")
                 return
 
         for (c1, c2), priority in all_pairs:
             pair_name = f"{c1}+{c2}"
 
-            # Budget di tempo basato sulla priorità
+            # Time budget based on priority
             if priority == "top":
                 time_budget = self.max_hours_per_pair * 2
             elif priority == "high":
@@ -288,13 +292,13 @@ class DeepSearchEngine:
                 time_budget = self.max_hours_per_pair * 0.5
 
             self.log(f"\n{'='*60}")
-            self.log(f"  COPPIA: ({c1}, {c2})  [priorità: {priority}]")
-            self.log(f"  Budget tempo: {time_budget:.1f}h")
+            self.log(f"  PAIR: ({c1}, {c2})  [priority: {priority}]")
+            self.log(f"  Time budget: {time_budget:.1f}h")
             self.log(f"{'='*60}")
 
             self._search_pair(c1, c2, pair_name, time_budget)
 
-        # === REPORT FINALE ===
+        # === FINAL REPORT ===
         self._generate_report()
 
     def _search_pair(
@@ -304,27 +308,27 @@ class DeepSearchEngine:
         pair_name: str,
         time_budget_hours: float,
     ):
-        """Ricerca profonda incrementale per una coppia."""
+        """Incremental deep search for a pair."""
 
         pair_start_time = time.time()
-        start_degree = 9  # da dove continua la Fase 1
+        start_degree = 9  # continuing from where Phase 1 left off
 
         for degree in range(start_degree, 200):
-            # Controlla tempo rimanente
+            # Check remaining time
             elapsed_hours = (time.time() - pair_start_time) / 3600
             remaining_hours = time_budget_hours - elapsed_hours
             if remaining_hours <= 0:
-                self.log(f"  ⏱ Budget tempo esaurito a grado {degree-1}.")
+                self.log(f"  ⏱ Time budget exhausted at degree {degree-1}.")
                 break
 
-            # === LIVELLO A: Coefficienti piccoli (≤100) ===
+            # === TIER A: Small coefficients (≤100) ===
             plan_small = compute_precision_plan(
                 degree, max_coeff=100, max_hours=remaining_hours
             )
             if not plan_small.is_feasible:
-                self.log(f"  📊 Grado {degree} (|c|≤100) non fattibile "
-                         f"(stima {plan_small.estimated_hours:.1f}h > {remaining_hours:.1f}h rimanenti). "
-                         f"Grado max raggiunto: {degree-1}.")
+                self.log(f"  📊 Degree {degree} (|c|≤100) not feasible "
+                         f"(estimate {plan_small.estimated_hours:.1f}h > {remaining_hours:.1f}h remaining). "
+                         f"Max degree reached: {degree-1}.")
                 break
 
             if not self.checkpoint.is_completed(pair_name, degree, 100):
@@ -333,16 +337,16 @@ class DeepSearchEngine:
                     max_coeff=100, plan=plan_small
                 )
                 if result_a and result_a.found_relation:
-                    self.log(f"  ★★★ RELAZIONE TROVATA a grado {degree}, |c|≤100! ★★★")
+                    self.log(f"  ★★★ RELATION FOUND at degree {degree}, |c|≤100! ★★★")
                     return
             else:
-                self.log(f"    Grado {degree}, |c|≤100: già completato (checkpoint)")
+                self.log(f"    Degree {degree}, |c|≤100: already completed (checkpoint)")
 
-            # Aggiorna tempo rimanente
+            # Update remaining time
             elapsed_hours = (time.time() - pair_start_time) / 3600
             remaining_hours = time_budget_hours - elapsed_hours
 
-            # === LIVELLO B: Coefficienti medi (≤10000) ===
+            # === TIER B: Medium coefficients (≤10000) ===
             plan_medium = compute_precision_plan(
                 degree, max_coeff=10000, max_hours=remaining_hours
             )
@@ -352,16 +356,16 @@ class DeepSearchEngine:
                     max_coeff=10000, plan=plan_medium
                 )
                 if result_b and result_b.found_relation:
-                    self.log(f"  ★★★ RELAZIONE TROVATA a grado {degree}, |c|≤10000! ★★★")
+                    self.log(f"  ★★★ RELATION FOUND at degree {degree}, |c|≤10000! ★★★")
                     return
             elif self.checkpoint.is_completed(pair_name, degree, 10000):
-                self.log(f"    Grado {degree}, |c|≤10000: già completato (checkpoint)")
+                self.log(f"    Degree {degree}, |c|≤10000: already completed (checkpoint)")
 
-            # Aggiorna tempo rimanente
+            # Update remaining time
             elapsed_hours = (time.time() - pair_start_time) / 3600
             remaining_hours = time_budget_hours - elapsed_hours
 
-            # === LIVELLO C: Coefficienti grandi (≤10⁶) — solo se veloce ===
+            # === TIER C: Large coefficients (≤10⁶) — only if fast ===
             plan_large = compute_precision_plan(
                 degree, max_coeff=10**6,
                 max_hours=min(1.0, remaining_hours)
@@ -372,10 +376,10 @@ class DeepSearchEngine:
                     max_coeff=10**6, plan=plan_large
                 )
                 if result_c and result_c.found_relation:
-                    self.log(f"  ★★★ RELAZIONE TROVATA a grado {degree}, |c|≤10⁶! ★★★")
+                    self.log(f"  ★★★ RELATION FOUND at degree {degree}, |c|≤10⁶! ★★★")
                     return
 
-        # Salva bound per questa coppia
+        # Save bounds for this pair
         self._save_pair_bounds(const1, const2, pair_name)
 
     def _run_single_pslq(
@@ -387,62 +391,69 @@ class DeepSearchEngine:
         max_coeff: int,
         plan: PrecisionPlan,
     ) -> Optional[DeepSearchResult]:
-        """Esegue una singola ricerca PSLQ."""
+        """Execute a single PSLQ search."""
 
         self.checkpoint.mark_started(pair_name, degree, max_coeff)
         t_start = time.time()
 
-        # Imposta precisione
+        # Set precision
         mpmath.mp.dps = plan.working_digits + 50
 
-        # Calcola costanti
+        # Compute constants
         alpha = self.get_constant_value(const1, plan.working_digits + 50)
         beta = self.get_constant_value(const2, plan.working_digits + 50)
 
-        # Genera monomiali
+        # Generate monomials
         values, exponents, labels = generate_bivariate_monomials(alpha, beta, degree)
 
-        self.log(f"    Grado {degree}, |c|≤{max_coeff}: "
-                 f"{plan.n_monomials} mono, {plan.working_digits} cifre "
-                 f"(stima {plan.estimated_hours*60:.1f}min)... ")
+        self.log(f"    Degree {degree}, |c|≤{max_coeff}: "
+                 f"{plan.n_monomials} mono, {plan.working_digits} digits "
+                 f"(est. {plan.estimated_hours*60:.1f}min)... ")
 
-        # Esegui PSLQ
+        # Run PSLQ with H-matrix bound extraction
         try:
-            relation = mpmath.pslq(values, maxcoeff=max_coeff, maxsteps=0)
+            pslq_result = pslq_bound(mpmath.mp, values, maxcoeff=max_coeff, maxsteps=0)
+            relation = pslq_result.relation
+            _norm_bound = pslq_result.norm_bound
+            _norm_bound_allH = pslq_result.norm_bound_allH
+            _pslq_iterations = pslq_result.iterations
         except Exception as exc:
-            self.log(f"    ⚠ Errore PSLQ: {exc}")
+            self.log(f"    ⚠ PSLQ error: {exc}")
             relation = None
+            _norm_bound = None
+            _norm_bound_allH = None
+            _pslq_iterations = None
 
         elapsed = time.time() - t_start
         found = relation is not None
 
-        # Costruisci il bound statement
+        # Build the bound statement
         bound_stmt = format_bound_statement(const1, const2, degree, max_coeff, found)
 
         residual_w = None
         residual_v = None
 
         if found:
-            # Calcola residuo a working precision
+            # Compute residual at working precision
             residual_val = abs(sum(c * v for c, v in zip(relation, values)))
             residual_w = float(residual_val) if residual_val > 0 else 0.0
 
-            # Controlla se degenere
+            # Check if degenerate
             nonzero = [c for c in relation if c != 0]
             if len(nonzero) <= 1:
-                self.log(f"    ⚠ Relazione degenere (un solo termine non-zero). Scartata.")
+                self.log(f"    ⚠ Degenerate relation (only one nonzero term). Discarded.")
                 found = False
             else:
-                # Controlla banalità con sympy
+                # Check triviality with sympy
                 is_trivial = check_relation_trivial_sympy(
                     relation, exponents, const1, const2
                 )
                 if is_trivial:
-                    self.log(f"    ⚠ Relazione banale (sympy simplifica a 0). Scartata.")
+                    self.log(f"    ⚠ Trivial relation (sympy simplifies to 0). Discarded.")
                     found = False
 
             if found:
-                # Verifica a precisione doppia
+                # Verify at double precision
                 mpmath.mp.dps = plan.verification_digits + 50
                 alpha_v = self.get_constant_value(const1, plan.verification_digits + 50)
                 beta_v = self.get_constant_value(const2, plan.verification_digits + 50)
@@ -450,7 +461,7 @@ class DeepSearchEngine:
                 residual_v_val = abs(sum(c * v for c, v in zip(relation, values_v)))
                 residual_v = float(residual_v_val) if residual_v_val > 0 else 0.0
 
-                # Formatta la relazione
+                # Format the relation
                 eq_parts = []
                 for c, (i, j) in zip(relation, exponents):
                     if c == 0:
@@ -458,12 +469,12 @@ class DeepSearchEngine:
                     eq_parts.append(f"{c}·{const1}^{i}·{const2}^{j}")
                 eq_str = " + ".join(eq_parts)
 
-                self.log(f"    ★ TROVATA! {eq_str} = 0")
-                self.log(f"    ★ Coefficienti: {relation}")
-                self.log(f"    ★ Residuo lavoro:    {residual_w:.5e}")
-                self.log(f"    ★ Residuo verifica:  {residual_v:.5e}")
+                self.log(f"    ★ FOUND! {eq_str} = 0")
+                self.log(f"    ★ Coefficients: {relation}")
+                self.log(f"    ★ Working residual:      {residual_w:.5e}")
+                self.log(f"    ★ Verification residual: {residual_v:.5e}")
 
-                # Salva candidata su disco
+                # Save candidate to disk
                 candidate = {
                     "pair": [const1, const2],
                     "degree": degree,
@@ -483,10 +494,13 @@ class DeepSearchEngine:
                     / f"CANDIDATE_{const1}_{const2}_d{degree}_{time.strftime('%Y%m%d_%H%M%S')}.json"
                 )
                 cand_path.write_text(json.dumps(candidate, indent=2))
-                self.log(f"    → Salvata in {cand_path}")
+                self.log(f"    → Saved to {cand_path}")
         else:
             elapsed_str = f"{elapsed:.1f}s" if elapsed < 60 else f"{elapsed/60:.1f}min"
-            self.log(f"    ✓ Nessuna relazione. {elapsed_str}. {bound_stmt}")
+            norm_info = ""
+            if _norm_bound is not None:
+                norm_info = f" ‖m‖₂ ≥ {_norm_bound}."
+            self.log(f"    ✓ No relation found. {elapsed_str}.{norm_info} {bound_stmt}")
 
         result = DeepSearchResult(
             pair=(const1, const2),
@@ -501,6 +515,9 @@ class DeepSearchEngine:
             bound_statement=bound_stmt,
             elapsed_seconds=elapsed,
             timestamp=time.strftime("%Y-%m-%dT%H:%M:%S"),
+            norm_bound=_norm_bound,
+            norm_bound_allH=_norm_bound_allH,
+            pslq_iterations=_pslq_iterations,
         )
 
         self.results.append(result)
@@ -510,12 +527,15 @@ class DeepSearchEngine:
             "found": found,
             "elapsed_s": round(elapsed, 1),
             "bound": bound_stmt,
+            "norm_bound": _norm_bound,
+            "norm_bound_allH": _norm_bound_allH,
+            "pslq_iterations": _pslq_iterations,
         })
 
         return result
 
     def _save_pair_bounds(self, const1: str, const2: str, pair_name: str):
-        """Salva un riepilogo dei bound per questa coppia."""
+        """Save a summary of bounds for this pair."""
         pair_results = [r for r in self.results if r.pair == (const1, const2)]
         if not pair_results:
             return
@@ -551,42 +571,42 @@ class DeepSearchEngine:
         bound_path.write_text(json.dumps(summary, indent=2))
 
     def _generate_report(self):
-        """Genera il report finale della ricerca profonda."""
+        """Generate the final deep search report."""
         report_path = self.deep_dir / "REPORT_DEEP_V2.md"
 
         lines = [
-            "# Report — Equazione Ponte, Fase 2: Ricerca Profonda ad Alto Grado",
-            f"**Data:** {time.strftime('%Y-%m-%d %H:%M:%S')}",
+            "# Report — Bridge Equation, Phase 2: High-Degree Deep Search",
+            f"**Date:** {time.strftime('%Y-%m-%d %H:%M:%S')}",
             f"**Hardware:** Intel i7-12700F, 64 GB DDR5, Debian 13",
             f"**Software:** Python 3, mpmath, sympy",
-            f"**Budget:** {self.max_hours_per_pair:.1f}h per coppia",
+            f"**Budget:** {self.max_hours_per_pair:.1f}h per pair",
             "",
             "---",
             "",
-            "## Risultato principale",
+            "## Main result",
             "",
         ]
 
         found_any = any(r.found_relation for r in self.results)
         if found_any:
-            lines.append("**⭐ RELAZIONE NON-BANALE TROVATA!** Vedere dettagli sotto.")
+            lines.append("**⭐ NON-TRIVIAL RELATION FOUND!** See details below.")
         else:
-            lines.append("**Nessuna relazione polinomiale non-banale trovata.**")
+            lines.append("**No non-trivial polynomial relation found.**")
             lines.append("")
-            lines.append("Questo è un risultato negativo computazionale significativo.")
+            lines.append("This is a significant negative computational result.")
 
-        # Tabella dei bound per coppia
+        # Bounds table per pair
         lines.extend([
             "",
             "---",
             "",
-            "## Bound stabiliti per coppia",
+            "## Bounds established per pair",
             "",
-            "| Coppia | Grado max (|c|≤100) | Grado max (|c|≤10⁴) | Grado max (|c|≤10⁶) | Tempo |",
-            "|--------|----------------------|----------------------|----------------------|-------|",
+            "| Pair | Max deg (|c|≤100) | Max deg (|c|≤10⁴) | Max deg (|c|≤10⁶) | Time |",
+            "|------|---------------------|---------------------|---------------------|------|",
         ])
 
-        # Raggruppa per coppia
+        # Group by pair
         pairs_seen = {}
         for r in self.results:
             key = f"({r.pair[0]}, {r.pair[1]})"
@@ -606,45 +626,45 @@ class DeepSearchEngine:
                 f"| {key}{status} | {data['100']} | {data['10000']} | {data['1000000']} | {time_str} |"
             )
 
-        # Dettaglio relazioni trovate
+        # Detail of found relations
         found_results = [r for r in self.results if r.found_relation]
         if found_results:
             lines.extend([
                 "",
                 "---",
                 "",
-                "## ⭐ Relazioni trovate",
+                "## ⭐ Relations found",
                 "",
             ])
             for r in found_results:
                 lines.extend([
-                    f"### ({r.pair[0]}, {r.pair[1]}) — grado {r.degree}",
-                    f"- **Coefficienti:** `{r.relation}`",
-                    f"- **Residuo lavoro:** {r.residual_working:.5e}",
-                    f"- **Residuo verifica:** {r.residual_verification:.5e}",
-                    f"- **Precisione:** {r.precision_digits} cifre (lavoro), "
-                    f"{r.precision_digits * 3 // 2} cifre (verifica)",
-                    f"- **Tempo:** {r.elapsed_seconds:.1f}s",
+                    f"### ({r.pair[0]}, {r.pair[1]}) — degree {r.degree}",
+                    f"- **Coefficients:** `{r.relation}`",
+                    f"- **Working residual:** {r.residual_working:.5e}",
+                    f"- **Verification residual:** {r.residual_verification:.5e}",
+                    f"- **Precision:** {r.precision_digits} digits (working), "
+                    f"{r.precision_digits * 3 // 2} digits (verification)",
+                    f"- **Time:** {r.elapsed_seconds:.1f}s",
                     "",
                 ])
 
-        # Statistiche
+        # Statistics
         total_time = sum(r.elapsed_seconds for r in self.results)
         total_searches = len(self.results)
         lines.extend([
             "",
             "---",
             "",
-            "## Statistiche",
+            "## Statistics",
             "",
-            f"- **Ricerche PSLQ totali:** {total_searches}",
-            f"- **Tempo totale:** {total_time/3600:.2f} ore ({total_time:.0f}s)",
-            f"- **Relazioni trovate:** {len(found_results)}",
-            f"- **Coppie esplorate:** {len(pairs_seen)}",
+            f"- **Total PSLQ searches:** {total_searches}",
+            f"- **Total time:** {total_time/3600:.2f} hours ({total_time:.0f}s)",
+            f"- **Relations found:** {len(found_results)}",
+            f"- **Pairs explored:** {len(pairs_seen)}",
             "",
             "---",
             "",
-            "## Riproducibilità",
+            "## Reproducibility",
             "",
             "```bash",
             "source ~/bridge_eq_env/bin/activate",
@@ -652,7 +672,7 @@ class DeepSearchEngine:
             f"python3 run_deep_search_v2.py --max-hours-per-pair {self.max_hours_per_pair}",
             "```",
             "",
-            "## Riferimenti",
+            "## References",
             "",
             "- Bailey & Ferguson, 'Numerical results on relations between fundamental constants' (1989)",
             "- Ferguson, Bailey & Arno, 'Analysis of PSLQ' (1999)",
@@ -660,4 +680,4 @@ class DeepSearchEngine:
         ])
 
         report_path.write_text("\n".join(lines))
-        self.log(f"\n  Report salvato in: {report_path}")
+        self.log(f"\n  Report saved to: {report_path}")

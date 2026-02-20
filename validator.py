@@ -1,14 +1,14 @@
 """
-Modulo di validazione INDIPENDENTE dei risultati.
+INDEPENDENT result validation module.
 
-PRINCIPIO: la validazione deve usare un percorso di calcolo completamente
-diverso dalla ricerca. Questo previene errori sistematici.
+PRINCIPLE: validation must use a computation path completely
+different from the search. This prevents systematic errors.
 
-Strategie di validazione:
-1. Ricalcolo a precisione maggiore (1000+ cifre)
-2. Ricalcolo con libreria diversa (gmpy2/sympy invece di mpmath)
-3. Verifica che il residuo scali correttamente con la precisione
-4. Tentativo di riduzione: la relazione può essere semplificata?
+Validation strategies:
+1. Recomputation at higher precision (1000+ digits)
+2. Recomputation with a different library (gmpy2/sympy instead of mpmath)
+3. Verify that the residual scales correctly with precision
+4. Reduction attempt: can the relation be simplified?
 """
 
 import mpmath
@@ -21,18 +21,18 @@ from functools import reduce
 
 @dataclass
 class ValidationResult:
-    """Risultato della validazione."""
+    """Validation result."""
     is_valid: bool
     residual_mpmath_1000: float
     residual_sympy: Optional[float]
-    scaling_consistent: bool  # il residuo scala come atteso con la precisione?
-    is_reducible: bool  # può essere semplificata (coefficienti con GCD > 1)?
+    scaling_consistent: bool  # does the residual scale as expected with precision?
+    is_reducible: bool  # can it be simplified (coefficients with GCD > 1)?
     reduced_equation: Optional[str]
     notes: str
 
 
 class ResultValidator:
-    """Validatore indipendente dei risultati PSLQ."""
+    """Independent validator for PSLQ results."""
 
     def validate(
         self,
@@ -41,13 +41,13 @@ class ResultValidator:
         constant_names: list,
     ) -> ValidationResult:
         """
-        Validazione completa di una relazione candidata.
+        Full validation of a candidate relation.
 
-        Esegue 4 livelli di verifica indipendente.
+        Performs 4 levels of independent verification.
         """
         notes = []
 
-        # === LIVELLO 1: Ricalcolo a 1000 cifre con mpmath ===
+        # === LEVEL 1: Recomputation at 1000 digits with mpmath ===
         mpmath.mp.dps = 1050
         values_1000 = self._compute_monomials_mpmath(
             constant_names, exponent_tuples
@@ -55,18 +55,18 @@ class ResultValidator:
         residual_1000 = abs(sum(
             c * v for c, v in zip(coefficients, values_1000)
         ))
-        notes.append(f"Residuo mpmath@1000: {mpmath.nstr(residual_1000, 5)}")
+        notes.append(f"Residual mpmath@1000: {mpmath.nstr(residual_1000, 5)}")
 
-        # === LIVELLO 2: Verifica con sympy (aritmetica esatta dove possibile) ===
+        # === LEVEL 2: Verification with sympy (exact arithmetic where possible) ===
         residual_sympy = self._verify_with_sympy(
             coefficients, exponent_tuples, constant_names
         )
         if residual_sympy is not None:
-            notes.append(f"Residuo sympy: {residual_sympy}")
+            notes.append(f"Residual sympy: {residual_sympy}")
 
-        # === LIVELLO 3: Scaling check ===
-        # Se la relazione è vera, il residuo a N cifre dovrebbe essere ~10^(-N)
-        # Se è spuria, il residuo non migliorerà con la precisione
+        # === LEVEL 3: Scaling check ===
+        # If the relation is true, the residual at N digits should be ~10^(-N)
+        # If spurious, the residual will not improve with precision
         mpmath.mp.dps = 550
         values_500 = self._compute_monomials_mpmath(
             constant_names, exponent_tuples
@@ -78,32 +78,32 @@ class ResultValidator:
         scaling_consistent = False
         if residual_500 > 0 and residual_1000 > 0:
             log_ratio = float(mpmath.log10(residual_500) - mpmath.log10(residual_1000))
-            # Dovrebbe essere circa 500 (differenza di precisione)
-            scaling_consistent = log_ratio > 400  # margine tollerante
-            notes.append(f"Scaling: log10(r500/r1000) = {log_ratio:.1f} (atteso ~500)")
+            # Should be approximately 500 (precision difference)
+            scaling_consistent = log_ratio > 400  # tolerant margin
+            notes.append(f"Scaling: log10(r500/r1000) = {log_ratio:.1f} (expected ~500)")
         elif residual_1000 == 0:
             scaling_consistent = True
-            notes.append("Scaling: residuo esattamente zero a 1000 cifre!")
+            notes.append("Scaling: residual exactly zero at 1000 digits!")
 
-        # === LIVELLO 4: Riducibilità (GCD dei coefficienti) ===
+        # === LEVEL 4: Reducibility (GCD of coefficients) ===
         nonzero_coeffs = [abs(c) for c in coefficients if c != 0]
         g = reduce(gcd, nonzero_coeffs) if nonzero_coeffs else 1
         is_reducible = g > 1
         reduced_eq = None
         if is_reducible:
             reduced_coeffs = [c // g for c in coefficients]
-            notes.append(f"GCD = {g}, coefficienti riducibili a {reduced_coeffs}")
+            notes.append(f"GCD = {g}, coefficients reducible to {reduced_coeffs}")
         else:
-            notes.append("Coefficienti irriducibili (GCD = 1)")
+            notes.append("Irreducible coefficients (GCD = 1)")
 
-        # === VERDETTO ===
+        # === VERDICT ===
         if residual_1000 == 0:
             is_valid = True
         elif residual_1000 > 0:
             log_res = float(mpmath.log10(residual_1000))
             is_valid = (
-                log_res < -900  # residuo molto piccolo
-                and scaling_consistent  # il residuo scala correttamente
+                log_res < -900  # very small residual
+                and scaling_consistent  # residual scales correctly
             )
         else:
             is_valid = False
@@ -119,7 +119,7 @@ class ResultValidator:
         )
 
     def _compute_monomials_mpmath(self, names, exponent_tuples):
-        """Calcola monomiali con mpmath alla precisione corrente."""
+        """Compute monomials with mpmath at the current precision."""
         from constants import ConstantsComputer
         from config import SearchConfig
 
@@ -139,9 +139,9 @@ class ResultValidator:
 
     def _verify_with_sympy(self, coefficients, exponent_tuples, names):
         """
-        Tenta verifica con sympy (aritmetica simbolica).
-        Per costanti come π, e, √2, sympy può calcolare in modo esatto.
-        Per γ, ζ(3), ecc., usa mpmath internamente ma con percorso diverso.
+        Attempt verification with sympy (symbolic arithmetic).
+        For constants like π, e, √2, sympy can compute exactly.
+        For γ, ζ(3), etc., it uses mpmath internally but via a different path.
         """
         try:
             sym_constants = {
@@ -170,15 +170,15 @@ class ResultValidator:
                     if exp > 0 and name in sym_constants:
                         term *= sym_constants[name] ** exp
                     elif exp > 0:
-                        return None  # costante non disponibile in sympy
+                        return None  # constant not available in sympy
                 total += term
 
-            # Prova semplificazione esatta
+            # Try exact simplification
             simplified = sympy.simplify(total)
             if simplified == 0:
-                return 0.0  # RELAZIONE ESATTA confermata da sympy!
+                return 0.0  # EXACT RELATION confirmed by sympy!
 
-            # Valutazione numerica con sympy
+            # Numerical evaluation with sympy
             return float(abs(simplified.evalf(100)))
 
         except Exception:

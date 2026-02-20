@@ -1,21 +1,21 @@
 """
-Motore di ricerca PSLQ per relazioni polinomiali tra costanti.
+PSLQ search engine for polynomial relations among constants.
 
-ALGORITMO:
-1. Per ogni sottoinsieme S di costanti (dimensione ≤ max_constants_per_search):
-   a. Genera tutti i monomiali fino al grado max_degree
-   b. Calcola i valori numerici dei monomiali a working_precision
-   c. Esegui PSLQ sul vettore dei valori
-   d. Se PSLQ restituisce una relazione:
-      - Verifica che la norma dei coefficienti sia ≤ max_coefficient_norm
-      - Verifica che NON sia una relazione "banale" (nota o derivabile)
-      - Ricalcola a verification_precision
-      - Se il residuo è ancora sotto soglia: CANDIDATA!
+ALGORITHM:
+1. For each subset S of constants (size ≤ max_constants_per_search):
+   a. Generate all monomials up to max_degree
+   b. Compute numerical values of the monomials at working_precision
+   c. Run PSLQ on the value vector
+   d. If PSLQ returns a relation:
+      - Verify that the coefficient norm is ≤ max_coefficient_norm
+      - Verify that it is NOT a "trivial" relation (known or derivable)
+      - Recompute at verification_precision
+      - If the residual is still below threshold: CANDIDATE!
 
-PRECAUZIONI:
-- PSLQ può restituire "relazioni" spurie quando la precisione è insufficiente
-- Le relazioni "banali" vanno filtrate (es. π² - π² = 0 se π² è nel set)
-- Il residuo deve calare di 20+ ordini di grandezza rispetto al "rumore di fondo"
+CAUTIONS:
+- PSLQ can return spurious "relations" when precision is insufficient
+- "Trivial" relations must be filtered (e.g. π² - π² = 0 if π² is in the set)
+- The residual must drop by 20+ orders of magnitude relative to background noise
 """
 
 import mpmath
@@ -36,83 +36,83 @@ from results_manager import ResultsManager
 
 @dataclass
 class PSLQResult:
-    """Un risultato della ricerca PSLQ."""
-    constants_used: List[str]          # nomi delle costanti coinvolte
-    coefficients: List[int]            # coefficienti interi trovati
-    exponents: List[Tuple[int, ...]]   # esponenti dei monomiali
-    labels: List[str]                  # etichette leggibili
-    residual_working: float            # residuo a working_precision
-    residual_verification: float       # residuo a verification_precision
-    coefficient_norm: float            # norma L2 dei coefficienti
-    max_coefficient: int               # massimo valore assoluto dei coefficienti
-    equation_string: str               # equazione in formato leggibile
-    is_trivial: bool                   # True se è una relazione banale/nota
-    search_time_seconds: float         # tempo di calcolo
+    """A PSLQ search result."""
+    constants_used: List[str]          # names of the constants involved
+    coefficients: List[int]            # integer coefficients found
+    exponents: List[Tuple[int, ...]]   # monomial exponents
+    labels: List[str]                  # human-readable labels
+    residual_working: float            # residual at working_precision
+    residual_verification: float       # residual at verification_precision
+    coefficient_norm: float            # L2 norm of coefficients
+    max_coefficient: int               # maximum absolute value of coefficients
+    equation_string: str               # equation in human-readable format
+    is_trivial: bool                   # True if it is a known/trivial relation
+    search_time_seconds: float         # computation time
     timestamp: str                     # ISO timestamp
 
 
 class PSLQSearchEngine:
-    """Motore di ricerca principale."""
+    """Main search engine."""
 
     def __init__(self, config: SearchConfig):
         self.config = config
         self.constants_computer = ConstantsComputer(config)
         self.results_manager = ResultsManager(config)
 
-        # Relazioni note da filtrare (aggiungi qui le relazioni banali)
+        # Known relations to filter (add trivial relations here)
         self.known_relations = self._load_known_relations()
 
     def run_full_search(self):
         """
-        Esegue la ricerca completa secondo la strategia definita in config.
+        Execute the full search according to the strategy defined in config.
 
-        STRATEGIA DI RICERCA (dal più promettente al meno):
+        SEARCH STRATEGY (from most to least promising):
 
-        Fase 1: Relazioni quadratiche tra costanti di Livello 1
-                 (π, e, γ, φ, ln2, √2) — grado 2, tutte le combinazioni
-                 Spazio piccolo, alta probabilità di risultato inedito
+        Phase 1: Quadratic relations among Level 1 constants
+                 (π, e, γ, φ, ln2, √2) — degree 2, all combinations
+                 Small space, high probability of novel result
 
-        Fase 2: Relazioni cubiche tra coppie/triplette di Livello 1
-                 Grado 3, dimensione PSLQ ancora gestibile
+        Phase 2: Cubic relations among Level 1 pairs/triples
+                 Degree 3, PSLQ dimension still manageable
 
-        Fase 3: Relazioni quadratiche con costanti di Livello 2
-                 (aggiunge ζ(3), Catalan, √3, √5, ln3, ...)
+        Phase 3: Quadratic relations with Level 2 constants
+                 (adds ζ(3), Catalan, √3, √5, ln3, ...)
 
-        Fase 4: Relazioni di grado 4 per i sottoinsiemi più promettenti
+        Phase 4: Degree 4 relations for the most promising subsets
 
-        Fase 5: Costanti esotiche di Livello 3
+        Phase 5: Exotic Level 3 constants
                  (Feigenbaum, Khinchin, Glaisher, ...)
         """
         print("=" * 70)
-        print("  PROGETTO EQUAZIONE PONTE — Ricerca Computazionale")
+        print("  BRIDGE EQUATION PROJECT — Computational Search")
         print("=" * 70)
 
-        # === STEP 0: Verifica integrità del sistema ===
-        print("\n[STEP 0] Verifica integrità del sistema di calcolo...")
+        # === STEP 0: System integrity check ===
+        print("\n[STEP 0] Verifying computation system integrity...")
         if not self.constants_computer.verify_known_relations():
-            print("\n ⚠ ERRORE CRITICO: i self-test sono falliti. INTERRUZIONE.")
+            print("\n ⚠ CRITICAL ERROR: self-tests failed. ABORTING.")
             return
 
-        # === Pre-calcolo costanti ===
+        # === Pre-compute constants ===
         all_names = (
             self.config.constants_level_1
             + self.config.constants_level_2
             + self.config.constants_level_3
         )
-        print(f"\n[STEP 1] Calcolo di {len(all_names)} costanti a {self.config.working_precision} cifre...")
+        print(f"\n[STEP 1] Computing {len(all_names)} constants at {self.config.working_precision} digits...")
         constants_work = self.constants_computer.compute_all(
             self.config.working_precision, all_names
         )
-        print(f"[STEP 1] Calcolo di {len(all_names)} costanti a {self.config.verification_precision} cifre...")
+        print(f"[STEP 1] Computing {len(all_names)} constants at {self.config.verification_precision} digits...")
         constants_verify = self.constants_computer.compute_all(
             self.config.verification_precision, all_names
         )
 
-        self.results_manager.log(f"Costanti calcolate: {len(all_names)} a {self.config.working_precision}/{self.config.verification_precision} cifre")
+        self.results_manager.log(f"Constants computed: {len(all_names)} at {self.config.working_precision}/{self.config.verification_precision} digits")
 
-        # === FASE 1: Quadratiche tra Livello 1 ===
+        # === PHASE 1: Quadratics among Level 1 ===
         self._run_phase(
-            phase_name="FASE 1: Relazioni quadratiche — Livello 1",
+            phase_name="PHASE 1: Quadratic relations — Level 1",
             constant_names=self.config.constants_level_1,
             max_degree=2,
             min_subset_size=2,
@@ -121,21 +121,21 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === FASE 2: Cubiche tra coppie/triplette di Livello 1 ===
+        # === PHASE 2: Cubics among Level 1 pairs/triples ===
         self._run_phase(
-            phase_name="FASE 2: Relazioni cubiche — Livello 1",
+            phase_name="PHASE 2: Cubic relations — Level 1",
             constant_names=self.config.constants_level_1,
             max_degree=3,
             min_subset_size=2,
-            max_subset_size=3,  # max 3 costanti per volta (altrimenti troppi monomiali)
+            max_subset_size=3,  # max 3 constants at a time (otherwise too many monomials)
             constants_work=constants_work,
             constants_verify=constants_verify,
         )
 
-        # === FASE 3: Quadratiche con Livello 2 ===
+        # === PHASE 3: Quadratics with Level 2 ===
         level_1_2 = self.config.constants_level_1 + self.config.constants_level_2
         self._run_phase(
-            phase_name="FASE 3: Relazioni quadratiche — Livello 1+2",
+            phase_name="PHASE 3: Quadratic relations — Level 1+2",
             constant_names=level_1_2,
             max_degree=2,
             min_subset_size=2,
@@ -144,25 +144,25 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === FASE 4: Grado 4 per sottoinsiemi piccoli ===
+        # === PHASE 4: Degree 4 for small subsets ===
         self._run_phase(
-            phase_name="FASE 4: Relazioni di grado 4 — coppie Livello 1",
+            phase_name="PHASE 4: Degree 4 relations — Level 1 pairs",
             constant_names=self.config.constants_level_1,
             max_degree=4,
             min_subset_size=2,
-            max_subset_size=2,  # solo coppie (altrimenti esplosione combinatoria)
+            max_subset_size=2,  # pairs only (otherwise combinatorial explosion)
             constants_work=constants_work,
             constants_verify=constants_verify,
         )
 
-        # === FASE 5: Costanti esotiche ===
+        # === PHASE 5: Exotic constants ===
         level_all = (
             self.config.constants_level_1
             + self.config.constants_level_2
             + self.config.constants_level_3
         )
         self._run_phase(
-            phase_name="FASE 5: Relazioni quadratiche — tutte le costanti",
+            phase_name="PHASE 5: Quadratic relations — all constants",
             constant_names=level_all,
             max_degree=2,
             min_subset_size=2,
@@ -171,9 +171,9 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === FASI ESTESE: SOLO TRASCENDENTI ===
-        # Le costanti algebriche (√2, √3, √5, φ) generano solo identità banali.
-        # Focalizziamoci sulle costanti genuinamente trascendenti.
+        # === EXTENDED PHASES: TRANSCENDENTALS ONLY ===
+        # Algebraic constants (√2, √3, √5, φ) only produce trivial identities.
+        # Focus on genuinely transcendental constants.
         transcendentals_core = ["pi", "e", "euler_gamma", "ln2"]
         transcendentals_extended = [
             "pi", "e", "euler_gamma", "ln2",
@@ -185,10 +185,10 @@ class PSLQSearchEngine:
             "zeta5", "khinchin", "glaisher", "omega",
         ]
 
-        # === FASE 6: Grado alto per coppie trascendenti core ===
-        # π, e, γ, ln2 — grado fino a 6 (15-28 monomiali per coppia)
+        # === PHASE 6: High degree for core transcendental pairs ===
+        # π, e, γ, ln2 — degree up to 6 (15-28 monomials per pair)
         self._run_phase(
-            phase_name="FASE 6: Grado 6 — coppie trascendenti core (π,e,γ,ln2)",
+            phase_name="PHASE 6: Degree 6 — core transcendental pairs (π,e,γ,ln2)",
             constant_names=transcendentals_core,
             max_degree=6,
             min_subset_size=2,
@@ -197,9 +197,9 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === FASE 7: Grado 5 per triplette trascendenti core ===
+        # === PHASE 7: Degree 5 for core transcendental triples ===
         self._run_phase(
-            phase_name="FASE 7: Grado 5 — triplette trascendenti core",
+            phase_name="PHASE 7: Degree 5 — core transcendental triples",
             constant_names=transcendentals_core,
             max_degree=5,
             min_subset_size=3,
@@ -208,9 +208,9 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === FASE 8: Grado 4 per triplette trascendenti estese ===
+        # === PHASE 8: Degree 4 for extended transcendental triples ===
         self._run_phase(
-            phase_name="FASE 8: Grado 4 — triplette trascendenti estese",
+            phase_name="PHASE 8: Degree 4 — extended transcendental triples",
             constant_names=transcendentals_extended,
             max_degree=4,
             min_subset_size=3,
@@ -219,9 +219,9 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === FASE 9: Grado 3 per quadruple/quintuple trascendenti ===
+        # === PHASE 9: Degree 3 for transcendental quadruples/quintuples ===
         self._run_phase(
-            phase_name="FASE 9: Grado 3 — quadruple trascendenti estese",
+            phase_name="PHASE 9: Degree 3 — extended transcendental quadruples",
             constant_names=transcendentals_extended,
             max_degree=3,
             min_subset_size=4,
@@ -230,9 +230,9 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === FASE 10: Grado 3 per coppie/triplette con costanti esotiche ===
+        # === PHASE 10: Degree 3 for pairs/triples with exotic constants ===
         self._run_phase(
-            phase_name="FASE 10: Grado 3 — trascendenti con costanti esotiche",
+            phase_name="PHASE 10: Degree 3 — transcendentals with exotic constants",
             constant_names=transcendentals_all,
             max_degree=3,
             min_subset_size=2,
@@ -241,9 +241,9 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === FASE 11: Grado 2 per quadruple/quintuple con costanti esotiche ===
+        # === PHASE 11: Degree 2 for quadruples/quintuples with exotic constants ===
         self._run_phase(
-            phase_name="FASE 11: Grado 2 — quadruple trascendenti complete",
+            phase_name="PHASE 11: Degree 2 — complete transcendental quadruples",
             constant_names=transcendentals_all,
             max_degree=2,
             min_subset_size=4,
@@ -252,7 +252,7 @@ class PSLQSearchEngine:
             constants_verify=constants_verify,
         )
 
-        # === REPORT FINALE ===
+        # === FINAL REPORT ===
         self.results_manager.generate_final_report()
 
     def _run_phase(
@@ -265,20 +265,20 @@ class PSLQSearchEngine:
         constants_work: Dict[str, mpmath.mpf],
         constants_verify: Dict[str, mpmath.mpf],
     ):
-        """Esegue una fase della ricerca."""
+        """Execute a search phase."""
         print(f"\n{'='*60}")
         print(f"  {phase_name}")
         print(f"{'='*60}")
 
-        self.results_manager.log(f"Inizio fase: {phase_name}")
+        self.results_manager.log(f"Starting phase: {phase_name}")
 
         n_total = len(constant_names)
         total_subsets = sum(
             1 for r in range(min_subset_size, min(max_subset_size, n_total) + 1)
             for _ in itertools.combinations(range(n_total), r)
         )
-        print(f"  Costanti: {n_total}, Grado max: {max_degree}")
-        print(f"  Sottoinsiemi da esplorare: {total_subsets}")
+        print(f"  Constants: {n_total}, Max degree: {max_degree}")
+        print(f"  Subsets to explore: {total_subsets}")
 
         subset_count = 0
         phase_candidates = 0
@@ -289,19 +289,19 @@ class PSLQSearchEngine:
                 subset_names = [constant_names[i] for i in subset_indices]
                 subset_count += 1
 
-                # Controlla se il numero di monomiali è gestibile
+                # Check if the number of monomials is manageable
                 n_monomials = count_monomials(len(subset_names), max_degree)
                 if n_monomials > self.config.max_monomials_per_vector:
                     self.results_manager.log(
                         f"  Skip {'+'.join(subset_names)} deg≤{max_degree}: "
-                        f"{n_monomials} monomiali > {self.config.max_monomials_per_vector}"
+                        f"{n_monomials} monomials > {self.config.max_monomials_per_vector}"
                     )
                     continue
 
-                # Progresso
+                # Progress
                 print(f"\r  [{subset_count}/{total_subsets}] "
                       f"{'+'.join(subset_names)} "
-                      f"(deg≤{max_degree}, {n_monomials} monomiali)...", end="", flush=True)
+                      f"(deg≤{max_degree}, {n_monomials} monomials)...", end="", flush=True)
 
                 result = self._search_single_subset(
                     subset_names, max_degree,
@@ -310,32 +310,32 @@ class PSLQSearchEngine:
 
                 if result and not result.is_trivial:
                     phase_candidates += 1
-                    print(f"\n  *** CANDIDATA TROVATA! ***")
+                    print(f"\n  *** CANDIDATE FOUND! ***")
                     print(f"  {result.equation_string}")
-                    print(f"  Residuo (lavoro):    {result.residual_working:.5e}")
-                    print(f"  Residuo (verifica):  {result.residual_verification:.5e}")
-                    print(f"  Norma coefficienti:  {result.coefficient_norm:.1f}")
+                    print(f"  Residual (working):      {result.residual_working:.5e}")
+                    print(f"  Residual (verification): {result.residual_verification:.5e}")
+                    print(f"  Coefficient norm:        {result.coefficient_norm:.1f}")
                     self.results_manager.save_candidate(result)
                     self.results_manager.log(
-                        f"  CANDIDATA: {result.equation_string} "
-                        f"(residuo_w={result.residual_working:.5e}, "
-                        f"residuo_v={result.residual_verification:.5e})"
+                        f"  CANDIDATE: {result.equation_string} "
+                        f"(residual_w={result.residual_working:.5e}, "
+                        f"residual_v={result.residual_verification:.5e})"
                     )
                 elif result and result.is_trivial:
-                    # Non salvare su disco le relazioni banali — solo log
+                    # Do not save trivial relations to disk — log only
                     self.results_manager.log(
-                        f"  Banale: {result.equation_string}"
+                        f"  Trivial: {result.equation_string}"
                     )
 
-                # Libera memoria dopo ogni subset
+                # Free memory after each subset
                 gc.collect()
 
         phase_elapsed = time.time() - phase_start
-        print(f"\n  Fase completata: {subset_count} sottoinsiemi esplorati "
-              f"in {phase_elapsed:.1f}s, {phase_candidates} candidate non banali.")
+        print(f"\n  Phase completed: {subset_count} subsets explored "
+              f"in {phase_elapsed:.1f}s, {phase_candidates} non-trivial candidates.")
         self.results_manager.log(
-            f"Fine fase: {phase_name} — {subset_count} subset, "
-            f"{phase_candidates} candidate, {phase_elapsed:.1f}s"
+            f"Phase complete: {phase_name} — {subset_count} subsets, "
+            f"{phase_candidates} candidates, {phase_elapsed:.1f}s"
         )
 
     def _search_single_subset(
@@ -345,30 +345,30 @@ class PSLQSearchEngine:
         constants_work: Dict[str, mpmath.mpf],
         constants_verify: Dict[str, mpmath.mpf],
     ) -> Optional[PSLQResult]:
-        """Esegue PSLQ su un singolo sottoinsieme di costanti."""
+        """Run PSLQ on a single subset of constants."""
 
         t_start = time.time()
 
-        # === CALCOLO MONOMIALI a working_precision ===
+        # === COMPUTE MONOMIALS at working_precision ===
         mpmath.mp.dps = self.config.working_precision + 50
         values_work, exponents, labels = compute_monomial_values(
             constants_work, subset_names, max_degree,
             self.config.max_monomials_per_vector
         )
 
-        # === ESECUZIONE PSLQ ===
+        # === RUN PSLQ ===
         try:
             relation = mpmath.pslq(values_work, maxcoeff=self.config.max_coefficient_norm)
         except Exception as ex:
             self.results_manager.log(
-                f"  PSLQ errore per {'+'.join(subset_names)} deg≤{max_degree}: {ex}"
+                f"  PSLQ error for {'+'.join(subset_names)} deg≤{max_degree}: {ex}"
             )
             return None
 
         if relation is None:
             return None
 
-        # === VERIFICA COEFFICIENTI ===
+        # === VERIFY COEFFICIENTS ===
         coefficients = list(relation)
         max_coeff = max(abs(c) for c in coefficients)
         norm = sum(c**2 for c in coefficients) ** 0.5
@@ -376,7 +376,7 @@ class PSLQSearchEngine:
         if max_coeff > self.config.max_coefficient_norm:
             return None
 
-        # === CALCOLO RESIDUO a working_precision ===
+        # === COMPUTE RESIDUAL at working_precision ===
         residual_work = abs(sum(
             c * v for c, v in zip(coefficients, values_work)
         ))
@@ -389,7 +389,7 @@ class PSLQSearchEngine:
         if log_residual_work > self.config.residual_threshold_log10 and residual_work != 0:
             return None
 
-        # === VERIFICA INDIPENDENTE a verification_precision ===
+        # === INDEPENDENT VERIFICATION at verification_precision ===
         mpmath.mp.dps = self.config.verification_precision + 50
         values_verify, _, _ = compute_monomial_values(
             constants_verify, subset_names, max_degree,
@@ -399,10 +399,10 @@ class PSLQSearchEngine:
             c * v for c, v in zip(coefficients, values_verify)
         ))
 
-        # === CONTROLLA BANALITÀ ===
+        # === CHECK TRIVIALITY ===
         is_trivial = self._check_trivial(coefficients, exponents, subset_names)
 
-        # === COSTRUISCI EQUAZIONE LEGGIBILE ===
+        # === BUILD HUMAN-READABLE EQUATION ===
         equation = self._format_equation(coefficients, labels)
 
         t_elapsed = time.time() - t_start
@@ -429,95 +429,95 @@ class PSLQSearchEngine:
         constant_names: List[str],
     ) -> bool:
         """
-        Verifica se una relazione trovata è "banale", cioè:
-        1. Ha solo un coefficiente non-zero (impossibile come relazione vera)
-        2. Coinvolge solo una costante (es. φ² - φ - 1 = 0 è nota)
-        3. Coinvolge solo costanti algebricamente dipendenti note
-        4. È una relazione nota moltiplicata per un fattore comune di monomiali
-           (es. e·(√2² - 2) = 0 è banale perché √2² = 2 è noto)
-        5. Coinvolge solo costanti algebriche (√2, √3, √5, φ) — tutte le
-           relazioni tra queste sono derivabili e non interessanti
+        Check whether a found relation is "trivial", i.e.:
+        1. Has only one nonzero coefficient (impossible as a true relation)
+        2. Involves only one constant (e.g. φ² - φ - 1 = 0 is known)
+        3. Involves only known algebraically dependent constants
+        4. Is a known relation multiplied by a common monomial factor
+           (e.g. e·(√2² - 2) = 0 is trivial because √2² = 2 is known)
+        5. Involves only algebraic constants (√2, √3, √5, φ) — all
+           relations among these are derivable and not interesting
 
-        NOTA: questo filtro è conservativo — meglio falsi positivi che
-        perdere una scoperta. Le relazioni "sospette" vengono segnalate
-        ma non scartate automaticamente.
+        NOTE: this filter is conservative — better to have false positives
+        than to miss a discovery. "Suspicious" relations are flagged
+        but not automatically discarded.
         """
         nonzero = [(c, e) for c, e in zip(coefficients, exponents) if c != 0]
 
-        # Solo un termine non-zero: impossibile essere una vera relazione
+        # Only one nonzero term: cannot be a true relation
         if len(nonzero) <= 1:
             return True
 
-        # === FATTORIZZAZIONE: rimuovi esponenti comuni ===
-        # Se tutti i termini non-zero condividono un fattore monomiale comune,
-        # la relazione si riduce. Es: e·(√2²-2)=0 → (√2²-2)=0 dopo aver
-        # diviso per e. Questo è il caso più frequente di falso positivo.
+        # === FACTORIZATION: remove common exponents ===
+        # If all nonzero terms share a common monomial factor,
+        # the relation reduces. E.g.: e·(√2²-2)=0 → (√2²-2)=0 after
+        # dividing by e. This is the most frequent case of false positive.
         nonzero_exps = [e for _, e in nonzero]
         n_vars = len(constant_names)
         min_exps = tuple(
             min(exp[i] for exp in nonzero_exps) for i in range(n_vars)
         )
-        # Riduci gli esponenti sottraendo il fattore comune
+        # Reduce exponents by subtracting the common factor
         reduced_exps = [
             tuple(exp[i] - min_exps[i] for i in range(n_vars))
             for exp in nonzero_exps
         ]
         reduced_nonzero = list(zip([c for c, _ in nonzero], reduced_exps))
 
-        # Dopo la riduzione, controlla quali variabili sono ancora coinvolte
+        # After reduction, check which variables are still involved
         involved_vars_reduced = set()
         for _, exp_tuple in reduced_nonzero:
             for i, e in enumerate(exp_tuple):
                 if e > 0:
                     involved_vars_reduced.add(i)
 
-        # Se dopo la riduzione coinvolge 0 o 1 costante → banale
-        # (relazione in una sola variabile, es. φ²-φ-1=0 o √2²-2=0)
+        # If after reduction it involves 0 or 1 constant → trivial
+        # (single-variable relation, e.g. φ²-φ-1=0 or √2²-2=0)
         if len(involved_vars_reduced) <= 1:
             return True
 
-        # Nomi delle costanti effettivamente coinvolte dopo riduzione
+        # Names of constants actually involved after reduction
         involved_names_reduced = {constant_names[i] for i in involved_vars_reduced}
 
-        # === COSTANTI PURAMENTE ALGEBRICHE ===
-        # Tutte le relazioni tra costanti algebriche sono derivabili
-        # e non costituiscono scoperte interessanti
+        # === PURELY ALGEBRAIC CONSTANTS ===
+        # All relations among algebraic constants are derivable
+        # and do not constitute interesting discoveries
         algebraic_constants = {"phi", "sqrt2", "sqrt3", "sqrt5"}
         if involved_names_reduced.issubset(algebraic_constants):
             return True
 
-        # === DIPENDENZE ALGEBRICHE NOTE ===
+        # === KNOWN ALGEBRAIC DEPENDENCIES ===
         trivial_groups = [
             {"phi", "sqrt5"},       # φ = (1+√5)/2
             {"pi", "pi2"},          # π² = π·π
-            {"ln2", "ln10"},        # relazione logaritmica prevedibile
-            {"ln5", "ln10"},        # relazione logaritmica prevedibile
+            {"ln2", "ln10"},        # predictable logarithmic relation
+            {"ln5", "ln10"},        # predictable logarithmic relation
             {"ln2", "ln5", "ln10"}, # ln2 + ln5 = ln10
-            {"ln2", "ln3", "ln5", "ln10"},  # relazioni logaritmiche
-            {"ln3", "ln10"},        # relazione logaritmica
+            {"ln2", "ln3", "ln5", "ln10"},  # logarithmic relations
+            {"ln3", "ln10"},        # logarithmic relation
         ]
         for group in trivial_groups:
             if involved_names_reduced.issubset(group):
                 return True
 
-        # === RELAZIONI LOGARITMICHE GENERALI ===
-        # Se dopo riduzione coinvolge solo costanti di tipo ln(n),
-        # è una relazione logaritmica derivabile (es. 2·ln2 - ln4 = 0)
+        # === GENERAL LOGARITHMIC RELATIONS ===
+        # If after reduction it involves only constants of type ln(n),
+        # it is a derivable logarithmic relation (e.g. 2·ln2 - ln4 = 0)
         log_constants = {"ln2", "ln3", "ln5", "ln10"}
         if involved_names_reduced.issubset(log_constants):
             return True
 
-        # === VERIFICA SIMBOLICA CON SYMPY ===
-        # Ultimo filtro e più robusto: se sympy riesce a semplificare
-        # l'espressione a zero, è una identità derivabile (anche se complessa).
-        # Questo cattura casi come (1+√5-2φ)·ln5 + (-φ-φ√5+2φ²) = 0
-        # dove l'identità si nasconde nella fattorizzazione.
+        # === SYMBOLIC VERIFICATION WITH SYMPY ===
+        # Last and most robust filter: if sympy can simplify
+        # the expression to zero, it is a derivable identity (even if complex).
+        # This catches cases like (1+√5-2φ)·ln5 + (-φ-φ√5+2φ²) = 0
+        # where the identity is hidden in the factorization.
         if self._sympy_simplifies_to_zero(coefficients, exponents, constant_names):
             return True
 
         return False
 
-    # Mappa costanti → simboli sympy (attributo di classe per evitare ricalcoli)
+    # Map constants → sympy symbols (class attribute to avoid recomputation)
     _SYMPY_CONSTANTS = {
         "pi": sympy.pi,
         "e": sympy.E,
@@ -544,13 +544,13 @@ class PSLQSearchEngine:
         constant_names: List[str],
     ) -> bool:
         """
-        Verifica se sympy riesce a semplificare l'espressione a zero.
-        Se sì, la relazione è derivabile algebricamente e quindi banale.
+        Check whether sympy can simplify the expression to zero.
+        If so, the relation is algebraically derivable and therefore trivial.
 
-        Usa multiple strategie di semplificazione:
-        1. simplify() diretto
-        2. rewrite(sqrt) + simplify() — espande GoldenRatio come (1+√5)/2
-        3. expand() diretto
+        Uses multiple simplification strategies:
+        1. Direct simplify()
+        2. rewrite(sqrt) + simplify() — expands GoldenRatio as (1+√5)/2
+        3. Direct expand()
         """
         try:
             total = sympy.Integer(0)
@@ -561,32 +561,32 @@ class PSLQSearchEngine:
                 for name, exp in zip(constant_names, exp_tuple):
                     if exp > 0:
                         if name not in self._SYMPY_CONSTANTS:
-                            # Costante non disponibile in sympy — non possiamo verificare
+                            # Constant not available in sympy — cannot verify
                             return False
                         term *= self._SYMPY_CONSTANTS[name] ** exp
                 total += term
 
-            # Strategia 1: simplify diretto
+            # Strategy 1: direct simplify
             if sympy.simplify(total) == 0:
                 return True
 
-            # Strategia 2: riscrivi costanti algebriche in forma radicale
-            # (es. GoldenRatio → (1+√5)/2) poi semplifica
+            # Strategy 2: rewrite algebraic constants in radical form
+            # (e.g. GoldenRatio → (1+√5)/2) then simplify
             rewritten = total.rewrite(sympy.sqrt)
             if sympy.simplify(rewritten) == 0:
                 return True
 
-            # Strategia 3: expand diretto (a volte basta)
+            # Strategy 3: direct expand (sometimes sufficient)
             if sympy.expand(rewritten) == 0:
                 return True
 
             return False
         except Exception:
-            # In caso di errore, non marcare come banale (conservativo)
+            # On error, do not mark as trivial (conservative)
             return False
 
     def _format_equation(self, coefficients: List[int], labels: List[str]) -> str:
-        """Formatta l'equazione in modo leggibile."""
+        """Format the equation in human-readable form."""
         terms = []
         for c, label in zip(coefficients, labels):
             if c == 0:
@@ -609,6 +609,6 @@ class PSLQSearchEngine:
         return "".join(terms) + " = 0"
 
     def _load_known_relations(self) -> list:
-        """Carica database di relazioni note per il filtro di banalità."""
-        # Questo potrebbe essere espanso con un file JSON esterno
+        """Load database of known relations for the triviality filter."""
+        # This could be expanded with an external JSON file
         return []

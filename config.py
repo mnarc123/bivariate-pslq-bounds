@@ -1,6 +1,6 @@
 """
-Configurazione del progetto Equazione Ponte.
-Tutti i parametri di ricerca sono centralizzati qui.
+Bridge Equation project configuration.
+All search parameters are centralized here.
 """
 
 from dataclasses import dataclass, field
@@ -9,78 +9,78 @@ from pathlib import Path
 
 @dataclass
 class SearchConfig:
-    """Parametri della ricerca PSLQ."""
+    """PSLQ search parameters."""
 
-    # === PRECISIONE ===
-    # La precisione in cifre decimali per il calcolo delle costanti.
-    # REGOLA: Per trovare una relazione con coefficienti di norma massima D
-    # in un vettore di dimensione N, servono almeno N*log10(D) cifre.
-    # Con N=50 e D=1000, servono ~150 cifre. Usiamo un margine di sicurezza 3x.
-    working_precision: int = 500  # cifre decimali di lavoro
-    verification_precision: int = 1000  # cifre per la verifica indipendente
+    # === PRECISION ===
+    # Decimal digit precision for constant computation.
+    # RULE: To find a relation with maximum coefficient norm D
+    # in a vector of dimension N, at least N*log10(D) digits are needed.
+    # With N=50 and D=1000, ~150 digits are required. We use a 3x safety margin.
+    working_precision: int = 500  # working decimal digits
+    verification_precision: int = 1000  # digits for independent verification
 
-    # === COSTANTI DA INCLUDERE ===
-    # Livello 1: le costanti più fondamentali (ricerca prioritaria)
+    # === CONSTANTS TO INCLUDE ===
+    # Level 1: most fundamental constants (priority search)
     constants_level_1: List[str] = field(default_factory=lambda: [
         "pi", "e", "euler_gamma", "phi",  # golden ratio
         "ln2", "sqrt2",
     ])
 
-    # Livello 2: costanti analitiche importanti
+    # Level 2: important analytic constants
     constants_level_2: List[str] = field(default_factory=lambda: [
-        "zeta3",          # Costante di Apéry ζ(3)
-        "catalan",        # Costante di Catalan G
+        "zeta3",          # Apéry's constant ζ(3)
+        "catalan",        # Catalan's constant G
         "sqrt3", "sqrt5",
         "ln3", "ln5", "ln10",
-        "pi2",            # π² (trattato come costante indipendente per efficienza)
+        "pi2",            # π² (treated as independent constant for efficiency)
     ])
 
-    # Livello 3: costanti più esotiche (ricerca secondaria)
+    # Level 3: more exotic constants (secondary search)
     constants_level_3: List[str] = field(default_factory=lambda: [
         "zeta5",          # ζ(5)
-        "khinchin",       # Costante di Khinchin K₀
-        "glaisher",       # Costante di Glaisher-Kinkelin A
-        "omega",          # Costante Omega Ω (soluzione di x*e^x = 1)
-        "feigenbaum_d",   # Prima costante di Feigenbaum δ
-        "feigenbaum_a",   # Seconda costante di Feigenbaum α
-        "meissel_mertens", # Costante di Meissel-Mertens M
-        "twin_prime",     # Costante dei primi gemelli C₂
+        "khinchin",       # Khinchin's constant K₀
+        "glaisher",       # Glaisher–Kinkelin constant A
+        "omega",          # Omega constant Ω (solution of x*e^x = 1)
+        "feigenbaum_d",   # First Feigenbaum constant δ
+        "feigenbaum_a",   # Second Feigenbaum constant α
+        "meissel_mertens", # Meissel–Mertens constant M
+        "twin_prime",     # Twin prime constant C₂
     ])
 
-    # === GRADI DI RICERCA ===
-    # Grado massimo del polinomio nelle costanti.
-    # Grado 1 = relazioni lineari (molto esplorate, improbabile trovare nuove)
-    # Grado 2 = relazioni quadratiche (poco esplorate per combinazioni miste)
-    # Grado 3 = relazioni cubiche (territorio quasi inesplorato)
-    # Grado 4+ = computazionalmente costoso, solo per sottoinsiemi piccoli
+    # === SEARCH DEGREES ===
+    # Maximum polynomial degree in the constants.
+    # Degree 1 = linear relations (well explored, unlikely to find new ones)
+    # Degree 2 = quadratic relations (poorly explored for mixed combinations)
+    # Degree 3 = cubic relations (nearly uncharted territory)
+    # Degree 4+ = computationally expensive, only for small subsets
     max_degree: int = 4
 
-    # === COEFFICIENTI ===
-    # Soglia della norma dei coefficienti interi.
-    # Relazioni con coefficienti grandi sono meno "interessanti" matematicamente.
-    # Bailey usa tipicamente soglia ~10^6 per risultati significativi.
+    # === COEFFICIENTS ===
+    # Integer coefficient norm threshold.
+    # Relations with large coefficients are less mathematically "interesting".
+    # Bailey typically uses a threshold of ~10^6 for significant results.
     max_coefficient_norm: int = 10**6
 
-    # === CRITERI DI VALIDITÀ ===
-    # Una relazione è considerata "candidata" se il residuo è < 10^(-threshold)
-    # quando calcolata a precision=working_precision.
-    # REGOLA EMPIRICA (Bailey): un "drop" di 20+ ordini di grandezza nel residuo
-    # rispetto al rumore di fondo indica quasi certamente una relazione reale.
-    residual_threshold_log10: int = -50  # |residuo| < 10^(-50) a 500 cifre
+    # === VALIDITY CRITERIA ===
+    # A relation is considered a "candidate" if the residual is < 10^(-threshold)
+    # when computed at precision=working_precision.
+    # EMPIRICAL RULE (Bailey): a "drop" of 20+ orders of magnitude in the residual
+    # relative to background noise almost certainly indicates a true relation.
+    residual_threshold_log10: int = -50  # |residual| < 10^(-50) at 500 digits
 
-    # Per la verifica: ricalcolo a precision doppia
-    verification_residual_threshold_log10: int = -100  # |residuo| < 10^(-100) a 1000 cifre
+    # For verification: recomputation at double precision
+    verification_residual_threshold_log10: int = -100  # |residual| < 10^(-100) at 1000 digits
 
-    # === STRATEGIA DI RICERCA ===
-    # Numero massimo di costanti per singola ricerca PSLQ
-    # (la complessità è polinomiale in N ma il tempo pratico cresce rapidamente)
+    # === SEARCH STRATEGY ===
+    # Maximum number of constants per single PSLQ search
+    # (complexity is polynomial in N but practical runtime grows rapidly)
     max_constants_per_search: int = 5
 
-    # Numero massimo di monomiali nel vettore PSLQ
-    # (oltre ~100 diventa molto lento anche con 500 cifre)
+    # Maximum number of monomials in the PSLQ vector
+    # (beyond ~100 it becomes very slow even at 500 digits)
     max_monomials_per_vector: int = 80
 
-    # === PERCORSI ===
+    # === PATHS ===
     project_root: Path = Path.home() / "bridge_equation"
     results_dir: Path = field(default_factory=lambda: Path.home() / "bridge_equation" / "results")
     cache_dir: Path = field(default_factory=lambda: Path.home() / "bridge_equation" / "cache")
