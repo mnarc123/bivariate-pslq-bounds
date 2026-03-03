@@ -1,0 +1,2006 @@
+{
+  "pairs": [
+    {
+      "index": 0,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 3,
+      "label": "sin(\u221a2), cos(\u221a3)",
+      "family1": "trig",
+      "family2": "trig"
+    },
+    {
+      "index": 1,
+      "func1": "log2",
+      "prime1": 5,
+      "func2": "tanh",
+      "prime2": 7,
+      "label": "log2(\u221a5), tanh(\u221a7)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 2,
+      "func1": "J0",
+      "prime1": 11,
+      "func2": "erf",
+      "prime2": 13,
+      "label": "J0(\u221a11), erf(\u221a13)",
+      "family1": "bessel",
+      "family2": "error"
+    },
+    {
+      "index": 3,
+      "func1": "sin",
+      "prime1": 17,
+      "func2": "exp1",
+      "prime2": 19,
+      "label": "sin(\u221a17), exp1(\u221a19)",
+      "family1": "trig",
+      "family2": "exp"
+    },
+    {
+      "index": 4,
+      "func1": "log2",
+      "prime1": 23,
+      "func2": "cos",
+      "prime2": 29,
+      "label": "log2(\u221a23), cos(\u221a29)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 5,
+      "func1": "tanh",
+      "prime1": 31,
+      "func2": "sin",
+      "prime2": 37,
+      "label": "tanh(\u221a31), sin(\u221a37)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 6,
+      "func1": "J1",
+      "prime1": 41,
+      "func2": "log",
+      "prime2": 43,
+      "label": "J1(\u221a41), log(\u221a43)",
+      "family1": "bessel",
+      "family2": "log"
+    },
+    {
+      "index": 7,
+      "func1": "erf",
+      "prime1": 47,
+      "func2": "cos",
+      "prime2": 53,
+      "label": "erf(\u221a47), cos(\u221a53)",
+      "family1": "error",
+      "family2": "trig"
+    },
+    {
+      "index": 8,
+      "func1": "sin",
+      "prime1": 59,
+      "func2": "tanh",
+      "prime2": 61,
+      "label": "sin(\u221a59), tanh(\u221a61)",
+      "family1": "trig",
+      "family2": "hyp"
+    },
+    {
+      "index": 9,
+      "func1": "log3",
+      "prime1": 67,
+      "func2": "J0",
+      "prime2": 71,
+      "label": "log3(\u221a67), J0(\u221a71)",
+      "family1": "log",
+      "family2": "bessel"
+    },
+    {
+      "index": 10,
+      "func1": "exp1",
+      "prime1": 73,
+      "func2": "sin",
+      "prime2": 79,
+      "label": "exp1(\u221a73), sin(\u221a79)",
+      "family1": "exp",
+      "family2": "trig"
+    },
+    {
+      "index": 11,
+      "func1": "cos",
+      "prime1": 83,
+      "func2": "erf",
+      "prime2": 89,
+      "label": "cos(\u221a83), erf(\u221a89)",
+      "family1": "trig",
+      "family2": "error"
+    },
+    {
+      "index": 12,
+      "func1": "tanh",
+      "prime1": 97,
+      "func2": "log",
+      "prime2": 101,
+      "label": "tanh(\u221a97), log(\u221a101)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 13,
+      "func1": "J0",
+      "prime1": 103,
+      "func2": "sin",
+      "prime2": 107,
+      "label": "J0(\u221a103), sin(\u221a107)",
+      "family1": "bessel",
+      "family2": "trig"
+    },
+    {
+      "index": 14,
+      "func1": "erf",
+      "prime1": 109,
+      "func2": "cos",
+      "prime2": 113,
+      "label": "erf(\u221a109), cos(\u221a113)",
+      "family1": "error",
+      "family2": "trig"
+    },
+    {
+      "index": 15,
+      "func1": "sin",
+      "prime1": 127,
+      "func2": "exp1",
+      "prime2": 131,
+      "label": "sin(\u221a127), exp1(\u221a131)",
+      "family1": "trig",
+      "family2": "exp"
+    },
+    {
+      "index": 16,
+      "func1": "log2",
+      "prime1": 137,
+      "func2": "tanh",
+      "prime2": 139,
+      "label": "log2(\u221a137), tanh(\u221a139)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 17,
+      "func1": "cos",
+      "prime1": 149,
+      "func2": "J1",
+      "prime2": 151,
+      "label": "cos(\u221a149), J1(\u221a151)",
+      "family1": "trig",
+      "family2": "bessel"
+    },
+    {
+      "index": 18,
+      "func1": "sin",
+      "prime1": 157,
+      "func2": "erf",
+      "prime2": 163,
+      "label": "sin(\u221a157), erf(\u221a163)",
+      "family1": "trig",
+      "family2": "error"
+    },
+    {
+      "index": 19,
+      "func1": "tanh",
+      "prime1": 167,
+      "func2": "log",
+      "prime2": 173,
+      "label": "tanh(\u221a167), log(\u221a173)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 20,
+      "func1": "exp1",
+      "prime1": 179,
+      "func2": "cos",
+      "prime2": 181,
+      "label": "exp1(\u221a179), cos(\u221a181)",
+      "family1": "exp",
+      "family2": "trig"
+    },
+    {
+      "index": 21,
+      "func1": "J0",
+      "prime1": 191,
+      "func2": "sin",
+      "prime2": 193,
+      "label": "J0(\u221a191), sin(\u221a193)",
+      "family1": "bessel",
+      "family2": "trig"
+    },
+    {
+      "index": 22,
+      "func1": "erf",
+      "prime1": 197,
+      "func2": "tanh",
+      "prime2": 199,
+      "label": "erf(\u221a197), tanh(\u221a199)",
+      "family1": "error",
+      "family2": "hyp"
+    },
+    {
+      "index": 23,
+      "func1": "sin",
+      "prime1": 211,
+      "func2": "log2",
+      "prime2": 223,
+      "label": "sin(\u221a211), log2(\u221a223)",
+      "family1": "trig",
+      "family2": "log"
+    },
+    {
+      "index": 24,
+      "func1": "cos",
+      "prime1": 227,
+      "func2": "exp1",
+      "prime2": 229,
+      "label": "cos(\u221a227), exp1(\u221a229)",
+      "family1": "trig",
+      "family2": "exp"
+    },
+    {
+      "index": 25,
+      "func1": "tanh",
+      "prime1": 233,
+      "func2": "J0",
+      "prime2": 239,
+      "label": "tanh(\u221a233), J0(\u221a239)",
+      "family1": "hyp",
+      "family2": "bessel"
+    },
+    {
+      "index": 26,
+      "func1": "log",
+      "prime1": 241,
+      "func2": "sin",
+      "prime2": 251,
+      "label": "log(\u221a241), sin(\u221a251)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 27,
+      "func1": "erf",
+      "prime1": 257,
+      "func2": "cos",
+      "prime2": 263,
+      "label": "erf(\u221a257), cos(\u221a263)",
+      "family1": "error",
+      "family2": "trig"
+    },
+    {
+      "index": 28,
+      "func1": "sin",
+      "prime1": 269,
+      "func2": "tanh",
+      "prime2": 271,
+      "label": "sin(\u221a269), tanh(\u221a271)",
+      "family1": "trig",
+      "family2": "hyp"
+    },
+    {
+      "index": 29,
+      "func1": "J1",
+      "prime1": 277,
+      "func2": "log3",
+      "prime2": 281,
+      "label": "J1(\u221a277), log3(\u221a281)",
+      "family1": "bessel",
+      "family2": "log"
+    },
+    {
+      "index": 30,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 3,
+      "label": "sin(\u221a2), log(\u221a3)",
+      "family1": "trig",
+      "family2": "log"
+    },
+    {
+      "index": 31,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 5,
+      "label": "sin(\u221a2), log2(\u221a5)",
+      "family1": "trig",
+      "family2": "log"
+    },
+    {
+      "index": 32,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 7,
+      "label": "sin(\u221a2), log3(\u221a7)",
+      "family1": "trig",
+      "family2": "log"
+    },
+    {
+      "index": 33,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 11,
+      "label": "sin(\u221a2), tanh(\u221a11)",
+      "family1": "trig",
+      "family2": "hyp"
+    },
+    {
+      "index": 34,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 13,
+      "label": "sin(\u221a2), erf(\u221a13)",
+      "family1": "trig",
+      "family2": "error"
+    },
+    {
+      "index": 35,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 17,
+      "label": "sin(\u221a2), J0(\u221a17)",
+      "family1": "trig",
+      "family2": "bessel"
+    },
+    {
+      "index": 36,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 19,
+      "label": "sin(\u221a2), J1(\u221a19)",
+      "family1": "trig",
+      "family2": "bessel"
+    },
+    {
+      "index": 37,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 23,
+      "label": "sin(\u221a2), exp1(\u221a23)",
+      "family1": "trig",
+      "family2": "exp"
+    },
+    {
+      "index": 38,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 29,
+      "label": "sin(\u221a2), sinh(\u221a29)",
+      "family1": "trig",
+      "family2": "hyp"
+    },
+    {
+      "index": 39,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 31,
+      "label": "sin(\u221a2), cosh(\u221a31)",
+      "family1": "trig",
+      "family2": "hyp"
+    },
+    {
+      "index": 40,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 37,
+      "label": "sin(\u221a2), Ai(\u221a37)",
+      "family1": "trig",
+      "family2": "special"
+    },
+    {
+      "index": 41,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 41,
+      "label": "sin(\u221a2), Li2(\u221a41)",
+      "family1": "trig",
+      "family2": "special"
+    },
+    {
+      "index": 42,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 43,
+      "label": "sin(\u221a2), zetax(\u221a43)",
+      "family1": "trig",
+      "family2": "special"
+    },
+    {
+      "index": 43,
+      "func1": "sin",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 47,
+      "label": "sin(\u221a2), Gamma(\u221a47)",
+      "family1": "trig",
+      "family2": "special"
+    },
+    {
+      "index": 44,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 53,
+      "label": "cos(\u221a2), log(\u221a53)",
+      "family1": "trig",
+      "family2": "log"
+    },
+    {
+      "index": 45,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 59,
+      "label": "cos(\u221a2), log2(\u221a59)",
+      "family1": "trig",
+      "family2": "log"
+    },
+    {
+      "index": 46,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 61,
+      "label": "cos(\u221a2), log3(\u221a61)",
+      "family1": "trig",
+      "family2": "log"
+    },
+    {
+      "index": 47,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 67,
+      "label": "cos(\u221a2), tanh(\u221a67)",
+      "family1": "trig",
+      "family2": "hyp"
+    },
+    {
+      "index": 48,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 71,
+      "label": "cos(\u221a2), erf(\u221a71)",
+      "family1": "trig",
+      "family2": "error"
+    },
+    {
+      "index": 49,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 73,
+      "label": "cos(\u221a2), J0(\u221a73)",
+      "family1": "trig",
+      "family2": "bessel"
+    },
+    {
+      "index": 50,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 79,
+      "label": "cos(\u221a2), J1(\u221a79)",
+      "family1": "trig",
+      "family2": "bessel"
+    },
+    {
+      "index": 51,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 83,
+      "label": "cos(\u221a2), exp1(\u221a83)",
+      "family1": "trig",
+      "family2": "exp"
+    },
+    {
+      "index": 52,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 89,
+      "label": "cos(\u221a2), sinh(\u221a89)",
+      "family1": "trig",
+      "family2": "hyp"
+    },
+    {
+      "index": 53,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 97,
+      "label": "cos(\u221a2), cosh(\u221a97)",
+      "family1": "trig",
+      "family2": "hyp"
+    },
+    {
+      "index": 54,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 101,
+      "label": "cos(\u221a2), Ai(\u221a101)",
+      "family1": "trig",
+      "family2": "special"
+    },
+    {
+      "index": 55,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 103,
+      "label": "cos(\u221a2), Li2(\u221a103)",
+      "family1": "trig",
+      "family2": "special"
+    },
+    {
+      "index": 56,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 107,
+      "label": "cos(\u221a2), zetax(\u221a107)",
+      "family1": "trig",
+      "family2": "special"
+    },
+    {
+      "index": 57,
+      "func1": "cos",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 109,
+      "label": "cos(\u221a2), Gamma(\u221a109)",
+      "family1": "trig",
+      "family2": "special"
+    },
+    {
+      "index": 58,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 113,
+      "label": "log(\u221a2), sin(\u221a113)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 59,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 127,
+      "label": "log(\u221a2), cos(\u221a127)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 60,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 131,
+      "label": "log(\u221a2), tanh(\u221a131)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 61,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 137,
+      "label": "log(\u221a2), erf(\u221a137)",
+      "family1": "log",
+      "family2": "error"
+    },
+    {
+      "index": 62,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 139,
+      "label": "log(\u221a2), J0(\u221a139)",
+      "family1": "log",
+      "family2": "bessel"
+    },
+    {
+      "index": 63,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 149,
+      "label": "log(\u221a2), J1(\u221a149)",
+      "family1": "log",
+      "family2": "bessel"
+    },
+    {
+      "index": 64,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 151,
+      "label": "log(\u221a2), exp1(\u221a151)",
+      "family1": "log",
+      "family2": "exp"
+    },
+    {
+      "index": 65,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 157,
+      "label": "log(\u221a2), sinh(\u221a157)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 66,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 163,
+      "label": "log(\u221a2), cosh(\u221a163)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 67,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 167,
+      "label": "log(\u221a2), arctan(\u221a167)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 68,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 173,
+      "label": "log(\u221a2), Ai(\u221a173)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 69,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 179,
+      "label": "log(\u221a2), Li2(\u221a179)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 70,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 181,
+      "label": "log(\u221a2), zetax(\u221a181)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 71,
+      "func1": "log",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 191,
+      "label": "log(\u221a2), Gamma(\u221a191)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 72,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 193,
+      "label": "log2(\u221a2), sin(\u221a193)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 73,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 197,
+      "label": "log2(\u221a2), cos(\u221a197)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 74,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 199,
+      "label": "log2(\u221a2), tanh(\u221a199)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 75,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 211,
+      "label": "log2(\u221a2), erf(\u221a211)",
+      "family1": "log",
+      "family2": "error"
+    },
+    {
+      "index": 76,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 223,
+      "label": "log2(\u221a2), J0(\u221a223)",
+      "family1": "log",
+      "family2": "bessel"
+    },
+    {
+      "index": 77,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 227,
+      "label": "log2(\u221a2), J1(\u221a227)",
+      "family1": "log",
+      "family2": "bessel"
+    },
+    {
+      "index": 78,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 229,
+      "label": "log2(\u221a2), exp1(\u221a229)",
+      "family1": "log",
+      "family2": "exp"
+    },
+    {
+      "index": 79,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 233,
+      "label": "log2(\u221a2), sinh(\u221a233)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 80,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 239,
+      "label": "log2(\u221a2), cosh(\u221a239)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 81,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 241,
+      "label": "log2(\u221a2), arctan(\u221a241)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 82,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 251,
+      "label": "log2(\u221a2), Ai(\u221a251)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 83,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 257,
+      "label": "log2(\u221a2), Li2(\u221a257)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 84,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 263,
+      "label": "log2(\u221a2), zetax(\u221a263)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 85,
+      "func1": "log2",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 269,
+      "label": "log2(\u221a2), Gamma(\u221a269)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 86,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 271,
+      "label": "log3(\u221a2), sin(\u221a271)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 87,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 277,
+      "label": "log3(\u221a2), cos(\u221a277)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 88,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 281,
+      "label": "log3(\u221a2), tanh(\u221a281)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 89,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 283,
+      "label": "log3(\u221a2), erf(\u221a283)",
+      "family1": "log",
+      "family2": "error"
+    },
+    {
+      "index": 90,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 293,
+      "label": "log3(\u221a2), J0(\u221a293)",
+      "family1": "log",
+      "family2": "bessel"
+    },
+    {
+      "index": 91,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 307,
+      "label": "log3(\u221a2), J1(\u221a307)",
+      "family1": "log",
+      "family2": "bessel"
+    },
+    {
+      "index": 92,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 311,
+      "label": "log3(\u221a2), exp1(\u221a311)",
+      "family1": "log",
+      "family2": "exp"
+    },
+    {
+      "index": 93,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 313,
+      "label": "log3(\u221a2), sinh(\u221a313)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 94,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 317,
+      "label": "log3(\u221a2), cosh(\u221a317)",
+      "family1": "log",
+      "family2": "hyp"
+    },
+    {
+      "index": 95,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 331,
+      "label": "log3(\u221a2), arctan(\u221a331)",
+      "family1": "log",
+      "family2": "trig"
+    },
+    {
+      "index": 96,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 337,
+      "label": "log3(\u221a2), Ai(\u221a337)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 97,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 347,
+      "label": "log3(\u221a2), Li2(\u221a347)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 98,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 349,
+      "label": "log3(\u221a2), zetax(\u221a349)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 99,
+      "func1": "log3",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 353,
+      "label": "log3(\u221a2), Gamma(\u221a353)",
+      "family1": "log",
+      "family2": "special"
+    },
+    {
+      "index": 100,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 359,
+      "label": "tanh(\u221a2), sin(\u221a359)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 101,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 367,
+      "label": "tanh(\u221a2), cos(\u221a367)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 102,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 373,
+      "label": "tanh(\u221a2), log(\u221a373)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 103,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 379,
+      "label": "tanh(\u221a2), log2(\u221a379)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 104,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 383,
+      "label": "tanh(\u221a2), log3(\u221a383)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 105,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 389,
+      "label": "tanh(\u221a2), erf(\u221a389)",
+      "family1": "hyp",
+      "family2": "error"
+    },
+    {
+      "index": 106,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 397,
+      "label": "tanh(\u221a2), J0(\u221a397)",
+      "family1": "hyp",
+      "family2": "bessel"
+    },
+    {
+      "index": 107,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 401,
+      "label": "tanh(\u221a2), J1(\u221a401)",
+      "family1": "hyp",
+      "family2": "bessel"
+    },
+    {
+      "index": 108,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 409,
+      "label": "tanh(\u221a2), exp1(\u221a409)",
+      "family1": "hyp",
+      "family2": "exp"
+    },
+    {
+      "index": 109,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 3,
+      "label": "tanh(\u221a2), arctan(\u221a3)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 110,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 3,
+      "label": "tanh(\u221a2), Ai(\u221a3)",
+      "family1": "hyp",
+      "family2": "special"
+    },
+    {
+      "index": 111,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 5,
+      "label": "tanh(\u221a2), Li2(\u221a5)",
+      "family1": "hyp",
+      "family2": "special"
+    },
+    {
+      "index": 112,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 7,
+      "label": "tanh(\u221a2), zetax(\u221a7)",
+      "family1": "hyp",
+      "family2": "special"
+    },
+    {
+      "index": 113,
+      "func1": "tanh",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 11,
+      "label": "tanh(\u221a2), Gamma(\u221a11)",
+      "family1": "hyp",
+      "family2": "special"
+    },
+    {
+      "index": 114,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 13,
+      "label": "erf(\u221a2), sin(\u221a13)",
+      "family1": "error",
+      "family2": "trig"
+    },
+    {
+      "index": 115,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 17,
+      "label": "erf(\u221a2), cos(\u221a17)",
+      "family1": "error",
+      "family2": "trig"
+    },
+    {
+      "index": 116,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 19,
+      "label": "erf(\u221a2), log(\u221a19)",
+      "family1": "error",
+      "family2": "log"
+    },
+    {
+      "index": 117,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 23,
+      "label": "erf(\u221a2), log2(\u221a23)",
+      "family1": "error",
+      "family2": "log"
+    },
+    {
+      "index": 118,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 29,
+      "label": "erf(\u221a2), log3(\u221a29)",
+      "family1": "error",
+      "family2": "log"
+    },
+    {
+      "index": 119,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 31,
+      "label": "erf(\u221a2), tanh(\u221a31)",
+      "family1": "error",
+      "family2": "hyp"
+    },
+    {
+      "index": 120,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 37,
+      "label": "erf(\u221a2), J0(\u221a37)",
+      "family1": "error",
+      "family2": "bessel"
+    },
+    {
+      "index": 121,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 41,
+      "label": "erf(\u221a2), J1(\u221a41)",
+      "family1": "error",
+      "family2": "bessel"
+    },
+    {
+      "index": 122,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 43,
+      "label": "erf(\u221a2), exp1(\u221a43)",
+      "family1": "error",
+      "family2": "exp"
+    },
+    {
+      "index": 123,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 47,
+      "label": "erf(\u221a2), sinh(\u221a47)",
+      "family1": "error",
+      "family2": "hyp"
+    },
+    {
+      "index": 124,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 53,
+      "label": "erf(\u221a2), cosh(\u221a53)",
+      "family1": "error",
+      "family2": "hyp"
+    },
+    {
+      "index": 125,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 59,
+      "label": "erf(\u221a2), arctan(\u221a59)",
+      "family1": "error",
+      "family2": "trig"
+    },
+    {
+      "index": 126,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 61,
+      "label": "erf(\u221a2), Ai(\u221a61)",
+      "family1": "error",
+      "family2": "special"
+    },
+    {
+      "index": 127,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 67,
+      "label": "erf(\u221a2), Li2(\u221a67)",
+      "family1": "error",
+      "family2": "special"
+    },
+    {
+      "index": 128,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 71,
+      "label": "erf(\u221a2), zetax(\u221a71)",
+      "family1": "error",
+      "family2": "special"
+    },
+    {
+      "index": 129,
+      "func1": "erf",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 73,
+      "label": "erf(\u221a2), Gamma(\u221a73)",
+      "family1": "error",
+      "family2": "special"
+    },
+    {
+      "index": 130,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 79,
+      "label": "J0(\u221a2), sin(\u221a79)",
+      "family1": "bessel",
+      "family2": "trig"
+    },
+    {
+      "index": 131,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 83,
+      "label": "J0(\u221a2), cos(\u221a83)",
+      "family1": "bessel",
+      "family2": "trig"
+    },
+    {
+      "index": 132,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 89,
+      "label": "J0(\u221a2), log(\u221a89)",
+      "family1": "bessel",
+      "family2": "log"
+    },
+    {
+      "index": 133,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 97,
+      "label": "J0(\u221a2), log2(\u221a97)",
+      "family1": "bessel",
+      "family2": "log"
+    },
+    {
+      "index": 134,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 101,
+      "label": "J0(\u221a2), log3(\u221a101)",
+      "family1": "bessel",
+      "family2": "log"
+    },
+    {
+      "index": 135,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 103,
+      "label": "J0(\u221a2), tanh(\u221a103)",
+      "family1": "bessel",
+      "family2": "hyp"
+    },
+    {
+      "index": 136,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 107,
+      "label": "J0(\u221a2), erf(\u221a107)",
+      "family1": "bessel",
+      "family2": "error"
+    },
+    {
+      "index": 137,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 109,
+      "label": "J0(\u221a2), exp1(\u221a109)",
+      "family1": "bessel",
+      "family2": "exp"
+    },
+    {
+      "index": 138,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 113,
+      "label": "J0(\u221a2), sinh(\u221a113)",
+      "family1": "bessel",
+      "family2": "hyp"
+    },
+    {
+      "index": 139,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 127,
+      "label": "J0(\u221a2), cosh(\u221a127)",
+      "family1": "bessel",
+      "family2": "hyp"
+    },
+    {
+      "index": 140,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 131,
+      "label": "J0(\u221a2), arctan(\u221a131)",
+      "family1": "bessel",
+      "family2": "trig"
+    },
+    {
+      "index": 141,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 137,
+      "label": "J0(\u221a2), Ai(\u221a137)",
+      "family1": "bessel",
+      "family2": "special"
+    },
+    {
+      "index": 142,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 139,
+      "label": "J0(\u221a2), Li2(\u221a139)",
+      "family1": "bessel",
+      "family2": "special"
+    },
+    {
+      "index": 143,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 149,
+      "label": "J0(\u221a2), zetax(\u221a149)",
+      "family1": "bessel",
+      "family2": "special"
+    },
+    {
+      "index": 144,
+      "func1": "J0",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 151,
+      "label": "J0(\u221a2), Gamma(\u221a151)",
+      "family1": "bessel",
+      "family2": "special"
+    },
+    {
+      "index": 145,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 157,
+      "label": "J1(\u221a2), sin(\u221a157)",
+      "family1": "bessel",
+      "family2": "trig"
+    },
+    {
+      "index": 146,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 163,
+      "label": "J1(\u221a2), cos(\u221a163)",
+      "family1": "bessel",
+      "family2": "trig"
+    },
+    {
+      "index": 147,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 167,
+      "label": "J1(\u221a2), log(\u221a167)",
+      "family1": "bessel",
+      "family2": "log"
+    },
+    {
+      "index": 148,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 173,
+      "label": "J1(\u221a2), log2(\u221a173)",
+      "family1": "bessel",
+      "family2": "log"
+    },
+    {
+      "index": 149,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 179,
+      "label": "J1(\u221a2), log3(\u221a179)",
+      "family1": "bessel",
+      "family2": "log"
+    },
+    {
+      "index": 150,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 181,
+      "label": "J1(\u221a2), tanh(\u221a181)",
+      "family1": "bessel",
+      "family2": "hyp"
+    },
+    {
+      "index": 151,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 191,
+      "label": "J1(\u221a2), erf(\u221a191)",
+      "family1": "bessel",
+      "family2": "error"
+    },
+    {
+      "index": 152,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 193,
+      "label": "J1(\u221a2), exp1(\u221a193)",
+      "family1": "bessel",
+      "family2": "exp"
+    },
+    {
+      "index": 153,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 197,
+      "label": "J1(\u221a2), sinh(\u221a197)",
+      "family1": "bessel",
+      "family2": "hyp"
+    },
+    {
+      "index": 154,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 199,
+      "label": "J1(\u221a2), cosh(\u221a199)",
+      "family1": "bessel",
+      "family2": "hyp"
+    },
+    {
+      "index": 155,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 211,
+      "label": "J1(\u221a2), arctan(\u221a211)",
+      "family1": "bessel",
+      "family2": "trig"
+    },
+    {
+      "index": 156,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 223,
+      "label": "J1(\u221a2), Ai(\u221a223)",
+      "family1": "bessel",
+      "family2": "special"
+    },
+    {
+      "index": 157,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 227,
+      "label": "J1(\u221a2), Li2(\u221a227)",
+      "family1": "bessel",
+      "family2": "special"
+    },
+    {
+      "index": 158,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 229,
+      "label": "J1(\u221a2), zetax(\u221a229)",
+      "family1": "bessel",
+      "family2": "special"
+    },
+    {
+      "index": 159,
+      "func1": "J1",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 233,
+      "label": "J1(\u221a2), Gamma(\u221a233)",
+      "family1": "bessel",
+      "family2": "special"
+    },
+    {
+      "index": 160,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 239,
+      "label": "exp1(\u221a2), sin(\u221a239)",
+      "family1": "exp",
+      "family2": "trig"
+    },
+    {
+      "index": 161,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 241,
+      "label": "exp1(\u221a2), cos(\u221a241)",
+      "family1": "exp",
+      "family2": "trig"
+    },
+    {
+      "index": 162,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 251,
+      "label": "exp1(\u221a2), log(\u221a251)",
+      "family1": "exp",
+      "family2": "log"
+    },
+    {
+      "index": 163,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 257,
+      "label": "exp1(\u221a2), log2(\u221a257)",
+      "family1": "exp",
+      "family2": "log"
+    },
+    {
+      "index": 164,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 263,
+      "label": "exp1(\u221a2), log3(\u221a263)",
+      "family1": "exp",
+      "family2": "log"
+    },
+    {
+      "index": 165,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "tanh",
+      "prime2": 269,
+      "label": "exp1(\u221a2), tanh(\u221a269)",
+      "family1": "exp",
+      "family2": "hyp"
+    },
+    {
+      "index": 166,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 271,
+      "label": "exp1(\u221a2), erf(\u221a271)",
+      "family1": "exp",
+      "family2": "error"
+    },
+    {
+      "index": 167,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 277,
+      "label": "exp1(\u221a2), J0(\u221a277)",
+      "family1": "exp",
+      "family2": "bessel"
+    },
+    {
+      "index": 168,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 281,
+      "label": "exp1(\u221a2), J1(\u221a281)",
+      "family1": "exp",
+      "family2": "bessel"
+    },
+    {
+      "index": 169,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "sinh",
+      "prime2": 283,
+      "label": "exp1(\u221a2), sinh(\u221a283)",
+      "family1": "exp",
+      "family2": "hyp"
+    },
+    {
+      "index": 170,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "cosh",
+      "prime2": 293,
+      "label": "exp1(\u221a2), cosh(\u221a293)",
+      "family1": "exp",
+      "family2": "hyp"
+    },
+    {
+      "index": 171,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 307,
+      "label": "exp1(\u221a2), arctan(\u221a307)",
+      "family1": "exp",
+      "family2": "trig"
+    },
+    {
+      "index": 172,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 311,
+      "label": "exp1(\u221a2), Ai(\u221a311)",
+      "family1": "exp",
+      "family2": "special"
+    },
+    {
+      "index": 173,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 313,
+      "label": "exp1(\u221a2), Li2(\u221a313)",
+      "family1": "exp",
+      "family2": "special"
+    },
+    {
+      "index": 174,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 317,
+      "label": "exp1(\u221a2), zetax(\u221a317)",
+      "family1": "exp",
+      "family2": "special"
+    },
+    {
+      "index": 175,
+      "func1": "exp1",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 331,
+      "label": "exp1(\u221a2), Gamma(\u221a331)",
+      "family1": "exp",
+      "family2": "special"
+    },
+    {
+      "index": 176,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 337,
+      "label": "sinh(\u221a2), sin(\u221a337)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 177,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 347,
+      "label": "sinh(\u221a2), cos(\u221a347)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 178,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 349,
+      "label": "sinh(\u221a2), log(\u221a349)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 179,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 353,
+      "label": "sinh(\u221a2), log2(\u221a353)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 180,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 359,
+      "label": "sinh(\u221a2), log3(\u221a359)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 181,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 367,
+      "label": "sinh(\u221a2), erf(\u221a367)",
+      "family1": "hyp",
+      "family2": "error"
+    },
+    {
+      "index": 182,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 373,
+      "label": "sinh(\u221a2), J0(\u221a373)",
+      "family1": "hyp",
+      "family2": "bessel"
+    },
+    {
+      "index": 183,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 379,
+      "label": "sinh(\u221a2), J1(\u221a379)",
+      "family1": "hyp",
+      "family2": "bessel"
+    },
+    {
+      "index": 184,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 383,
+      "label": "sinh(\u221a2), exp1(\u221a383)",
+      "family1": "hyp",
+      "family2": "exp"
+    },
+    {
+      "index": 185,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 389,
+      "label": "sinh(\u221a2), arctan(\u221a389)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 186,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "Ai",
+      "prime2": 397,
+      "label": "sinh(\u221a2), Ai(\u221a397)",
+      "family1": "hyp",
+      "family2": "special"
+    },
+    {
+      "index": 187,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "Li2",
+      "prime2": 401,
+      "label": "sinh(\u221a2), Li2(\u221a401)",
+      "family1": "hyp",
+      "family2": "special"
+    },
+    {
+      "index": 188,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "zetax",
+      "prime2": 409,
+      "label": "sinh(\u221a2), zetax(\u221a409)",
+      "family1": "hyp",
+      "family2": "special"
+    },
+    {
+      "index": 189,
+      "func1": "sinh",
+      "prime1": 2,
+      "func2": "Gamma",
+      "prime2": 3,
+      "label": "sinh(\u221a2), Gamma(\u221a3)",
+      "family1": "hyp",
+      "family2": "special"
+    },
+    {
+      "index": 190,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "sin",
+      "prime2": 3,
+      "label": "cosh(\u221a2), sin(\u221a3)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 191,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "cos",
+      "prime2": 5,
+      "label": "cosh(\u221a2), cos(\u221a5)",
+      "family1": "hyp",
+      "family2": "trig"
+    },
+    {
+      "index": 192,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "log",
+      "prime2": 7,
+      "label": "cosh(\u221a2), log(\u221a7)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 193,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "log2",
+      "prime2": 11,
+      "label": "cosh(\u221a2), log2(\u221a11)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 194,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "log3",
+      "prime2": 13,
+      "label": "cosh(\u221a2), log3(\u221a13)",
+      "family1": "hyp",
+      "family2": "log"
+    },
+    {
+      "index": 195,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "erf",
+      "prime2": 17,
+      "label": "cosh(\u221a2), erf(\u221a17)",
+      "family1": "hyp",
+      "family2": "error"
+    },
+    {
+      "index": 196,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "J0",
+      "prime2": 19,
+      "label": "cosh(\u221a2), J0(\u221a19)",
+      "family1": "hyp",
+      "family2": "bessel"
+    },
+    {
+      "index": 197,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "J1",
+      "prime2": 23,
+      "label": "cosh(\u221a2), J1(\u221a23)",
+      "family1": "hyp",
+      "family2": "bessel"
+    },
+    {
+      "index": 198,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "exp1",
+      "prime2": 29,
+      "label": "cosh(\u221a2), exp1(\u221a29)",
+      "family1": "hyp",
+      "family2": "exp"
+    },
+    {
+      "index": 199,
+      "func1": "cosh",
+      "prime1": 2,
+      "func2": "arctan",
+      "prime2": 31,
+      "label": "cosh(\u221a2), arctan(\u221a31)",
+      "family1": "hyp",
+      "family2": "trig"
+    }
+  ],
+  "n_pairs": 200,
+  "timestamp": "2026-03-03T10:25:48"
+}
