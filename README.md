@@ -133,3 +133,5 @@ Total computation: ~24 hours wall-clock (10 parallel workers), ~160 CPU-hours, 1
 Code: [MIT License](LICENSE)
 
 Paper: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+[![DOI](https://zenodo.org/badge/1161208505.svg)](https://doi.org/10.5281/zenodo.18686238)
