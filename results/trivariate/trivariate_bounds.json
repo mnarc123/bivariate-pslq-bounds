@@ -1,0 +1,1944 @@
+{
+  "results": [
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 11129,
+      "elapsed": 3.2,
+      "timestamp": "2026-03-02T15:36:22"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1256447,
+      "elapsed": 5.7,
+      "timestamp": "2026-03-02T15:36:28"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 100299408,
+      "elapsed": 7.8,
+      "timestamp": "2026-03-02T15:36:36"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10939,
+      "elapsed": 62.4,
+      "timestamp": "2026-03-02T15:37:36"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1014884,
+      "elapsed": 141.0,
+      "timestamp": "2026-03-02T15:38:57"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 109428442,
+      "elapsed": 153.3,
+      "timestamp": "2026-03-02T15:39:34"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10874,
+      "elapsed": 772.0,
+      "timestamp": "2026-03-02T15:50:28"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10120,
+      "elapsed": 6.7,
+      "timestamp": "2026-03-02T15:55:42"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1023425,
+      "elapsed": 8.3,
+      "timestamp": "2026-03-02T15:55:50"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 105146000,
+      "elapsed": 8.3,
+      "timestamp": "2026-03-02T15:55:59"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10158,
+      "elapsed": 65.3,
+      "timestamp": "2026-03-02T15:57:04"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1060845,
+      "elapsed": 100.5,
+      "timestamp": "2026-03-02T15:57:45"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 102760446,
+      "elapsed": 171.2,
+      "timestamp": "2026-03-02T15:59:55"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1006807,
+      "elapsed": 1556.2,
+      "timestamp": "2026-03-02T16:04:53"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10048,
+      "elapsed": 749.0,
+      "timestamp": "2026-03-02T16:10:14"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10304,
+      "elapsed": 6.0,
+      "timestamp": "2026-03-02T16:13:28"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1008547,
+      "elapsed": 9.6,
+      "timestamp": "2026-03-02T16:13:38"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 100859663,
+      "elapsed": 14.5,
+      "timestamp": "2026-03-02T16:13:52"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10356,
+      "elapsed": 111.8,
+      "timestamp": "2026-03-02T16:15:44"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 100478818,
+      "elapsed": 2304.7,
+      "timestamp": "2026-03-02T16:17:59"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1029606,
+      "elapsed": 187.4,
+      "timestamp": "2026-03-02T16:18:51"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 102824999,
+      "elapsed": 195.1,
+      "timestamp": "2026-03-02T16:21:14"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1029580,
+      "elapsed": 1300.1,
+      "timestamp": "2026-03-02T16:21:35"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 11497,
+      "elapsed": 1010.1,
+      "timestamp": "2026-03-02T16:35:41"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 100971503,
+      "elapsed": 2170.7,
+      "timestamp": "2026-03-02T16:38:34"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1045609,
+      "elapsed": 1404.2,
+      "timestamp": "2026-03-02T16:44:38"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 100038946,
+      "elapsed": 2760.2,
+      "timestamp": "2026-03-02T17:07:35"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 11170,
+      "elapsed": 2.9,
+      "timestamp": "2026-03-02T17:07:38"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1052854,
+      "elapsed": 4.7,
+      "timestamp": "2026-03-02T17:07:43"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 111573582,
+      "elapsed": 7.4,
+      "timestamp": "2026-03-02T17:07:50"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10435,
+      "elapsed": 67.0,
+      "timestamp": "2026-03-02T17:08:57"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1092830,
+      "elapsed": 95.2,
+      "timestamp": "2026-03-02T17:10:33"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 112694387,
+      "elapsed": 163.8,
+      "timestamp": "2026-03-02T17:13:16"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10805,
+      "elapsed": 784.5,
+      "timestamp": "2026-03-02T17:26:21"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1081340,
+      "elapsed": 1416.5,
+      "timestamp": "2026-03-02T17:49:57"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 6,
+      "max_coeff": 100,
+      "n_monomials": 84,
+      "precision_digits": 504,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10267,
+      "elapsed": 9147.5,
+      "timestamp": "2026-03-02T18:16:31"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 101718392,
+      "elapsed": 2893.0,
+      "timestamp": "2026-03-02T18:38:10"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 100,
+      "n_monomials": 84,
+      "precision_digits": 504,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10354,
+      "elapsed": 9206.2,
+      "timestamp": "2026-03-02T18:38:19"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 100,
+      "n_monomials": 84,
+      "precision_digits": 504,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 11356,
+      "elapsed": 9160.1,
+      "timestamp": "2026-03-02T19:08:21"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10010,
+      "elapsed": 3.2,
+      "timestamp": "2026-03-02T19:08:25"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1121570,
+      "elapsed": 5.1,
+      "timestamp": "2026-03-02T19:08:30"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 101325823,
+      "elapsed": 7.3,
+      "timestamp": "2026-03-02T19:08:37"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10834,
+      "elapsed": 57.8,
+      "timestamp": "2026-03-02T19:09:35"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1003616,
+      "elapsed": 98.0,
+      "timestamp": "2026-03-02T19:11:13"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 105122277,
+      "elapsed": 146.8,
+      "timestamp": "2026-03-02T19:13:40"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10104,
+      "elapsed": 706.8,
+      "timestamp": "2026-03-02T19:25:26"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1000251,
+      "elapsed": 1253.9,
+      "timestamp": "2026-03-02T19:46:20"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, e, G)",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 106053121,
+      "elapsed": 2099.6,
+      "timestamp": "2026-03-02T20:21:20"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10217,
+      "elapsed": 5.8,
+      "timestamp": "2026-03-02T20:21:26"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1005517,
+      "elapsed": 9.7,
+      "timestamp": "2026-03-02T20:21:35"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 100089868,
+      "elapsed": 7.6,
+      "timestamp": "2026-03-02T20:21:43"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10602,
+      "elapsed": 57.9,
+      "timestamp": "2026-03-02T20:22:41"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1041917,
+      "elapsed": 101.3,
+      "timestamp": "2026-03-02T20:24:22"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 107517739,
+      "elapsed": 227.9,
+      "timestamp": "2026-03-02T20:28:10"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10847,
+      "elapsed": 814.8,
+      "timestamp": "2026-03-02T20:41:45"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 6,
+      "max_coeff": 10000,
+      "n_monomials": 84,
+      "precision_digits": 840,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1018007,
+      "elapsed": 17932.9,
+      "timestamp": "2026-03-02T20:49:21"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 100,
+      "n_monomials": 84,
+      "precision_digits": 504,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10178,
+      "elapsed": 9338.3,
+      "timestamp": "2026-03-02T20:52:10"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10568,
+      "elapsed": 3.7,
+      "timestamp": "2026-03-02T20:52:14"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1035751,
+      "elapsed": 4.9,
+      "timestamp": "2026-03-02T20:52:18"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 108704869,
+      "elapsed": 9.0,
+      "timestamp": "2026-03-02T20:52:27"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10205,
+      "elapsed": 91.7,
+      "timestamp": "2026-03-02T20:53:59"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1014253,
+      "elapsed": 190.5,
+      "timestamp": "2026-03-02T20:57:10"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 122501155,
+      "elapsed": 291.4,
+      "timestamp": "2026-03-02T21:02:01"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 10000,
+      "n_monomials": 84,
+      "precision_digits": 840,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1045647,
+      "elapsed": 17646.3,
+      "timestamp": "2026-03-02T21:04:20"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1050044,
+      "elapsed": 1441.2,
+      "timestamp": "2026-03-02T21:05:46"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 12896,
+      "elapsed": 957.1,
+      "timestamp": "2026-03-02T21:17:58"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10774,
+      "elapsed": 3.3,
+      "timestamp": "2026-03-02T21:18:01"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1006750,
+      "elapsed": 5.0,
+      "timestamp": "2026-03-02T21:18:06"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 100200299,
+      "elapsed": 7.5,
+      "timestamp": "2026-03-02T21:18:14"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10138,
+      "elapsed": 111.1,
+      "timestamp": "2026-03-02T21:20:05"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 10000,
+      "n_monomials": 84,
+      "precision_digits": 840,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1159924,
+      "elapsed": 16949.7,
+      "timestamp": "2026-03-02T21:21:04"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1087069,
+      "elapsed": 121.0,
+      "timestamp": "2026-03-02T21:22:06"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 115486763,
+      "elapsed": 194.2,
+      "timestamp": "2026-03-02T21:24:18"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1118367,
+      "elapsed": 1323.1,
+      "timestamp": "2026-03-02T21:26:23"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, G)",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 108231347,
+      "elapsed": 2413.4,
+      "timestamp": "2026-03-02T21:29:34"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10345,
+      "elapsed": 3.2,
+      "timestamp": "2026-03-02T21:29:38"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1006602,
+      "elapsed": 5.2,
+      "timestamp": "2026-03-02T21:29:43"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 102132326,
+      "elapsed": 7.7,
+      "timestamp": "2026-03-02T21:29:51"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10317,
+      "elapsed": 61.9,
+      "timestamp": "2026-03-02T21:30:53"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1017475,
+      "elapsed": 102.7,
+      "timestamp": "2026-03-02T21:32:35"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10160,
+      "elapsed": 703.4,
+      "timestamp": "2026-03-02T21:33:49"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 106363048,
+      "elapsed": 197.3,
+      "timestamp": "2026-03-02T21:35:53"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "ln2"
+      ],
+      "triple_symbol": "(\u03c0, e, ln2)",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 114190882,
+      "elapsed": 2450.2,
+      "timestamp": "2026-03-02T21:46:36"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10162,
+      "elapsed": 832.4,
+      "timestamp": "2026-03-02T21:47:42"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 3,
+      "max_coeff": 100,
+      "n_monomials": 20,
+      "precision_digits": 120,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10485,
+      "elapsed": 3.2,
+      "timestamp": "2026-03-02T21:47:45"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 3,
+      "max_coeff": 10000,
+      "n_monomials": 20,
+      "precision_digits": 200,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1107235,
+      "elapsed": 5.1,
+      "timestamp": "2026-03-02T21:47:50"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 3,
+      "max_coeff": 1000000,
+      "n_monomials": 20,
+      "precision_digits": 280,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 115503138,
+      "elapsed": 7.7,
+      "timestamp": "2026-03-02T21:47:58"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 4,
+      "max_coeff": 100,
+      "n_monomials": 35,
+      "precision_digits": 210,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10661,
+      "elapsed": 61.4,
+      "timestamp": "2026-03-02T21:48:59"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 4,
+      "max_coeff": 10000,
+      "n_monomials": 35,
+      "precision_digits": 350,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1146017,
+      "elapsed": 112.3,
+      "timestamp": "2026-03-02T21:50:51"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 4,
+      "max_coeff": 1000000,
+      "n_monomials": 35,
+      "precision_digits": 490,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 110364797,
+      "elapsed": 156.8,
+      "timestamp": "2026-03-02T21:53:28"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1001217,
+      "elapsed": 1854.0,
+      "timestamp": "2026-03-02T21:55:12"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1019411,
+      "elapsed": 1402.1,
+      "timestamp": "2026-03-02T21:59:15"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "zeta3",
+        "catalan"
+      ],
+      "triple_symbol": "(\u03c0, \u03b6(3), G)",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 115070205,
+      "elapsed": 2306.7,
+      "timestamp": "2026-03-02T22:04:50"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 5,
+      "max_coeff": 100,
+      "n_monomials": 56,
+      "precision_digits": 336,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 10108,
+      "elapsed": 782.6,
+      "timestamp": "2026-03-02T22:06:31"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 5,
+      "max_coeff": 10000,
+      "n_monomials": 56,
+      "precision_digits": 560,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1000242,
+      "elapsed": 1481.2,
+      "timestamp": "2026-03-02T22:19:53"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "ln2"
+      ],
+      "triple_symbol": "(e, \u03b3, ln2)",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 103539247,
+      "elapsed": 2645.1,
+      "timestamp": "2026-03-02T22:30:42"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta5"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(5))",
+      "degree": 5,
+      "max_coeff": 1000000,
+      "n_monomials": 56,
+      "precision_digits": 784,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 100708038,
+      "elapsed": 2163.9,
+      "timestamp": "2026-03-02T22:35:19"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 10000,
+      "n_monomials": 84,
+      "precision_digits": 840,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 1037008,
+      "elapsed": 16154.8,
+      "timestamp": "2026-03-02T23:07:25"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 1000000,
+      "n_monomials": 84,
+      "precision_digits": 1176,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 106317892,
+      "elapsed": 27928.1,
+      "timestamp": "2026-03-02T23:56:33"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "e",
+        "euler_gamma"
+      ],
+      "triple_symbol": "(\u03c0, e, \u03b3)",
+      "degree": 6,
+      "max_coeff": 1000000,
+      "n_monomials": 84,
+      "precision_digits": 1176,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 104969853,
+      "elapsed": 29470.7,
+      "timestamp": "2026-03-03T00:02:56"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "pi",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(\u03c0, \u03b3, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 1000000,
+      "n_monomials": 84,
+      "precision_digits": 1176,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 119375571,
+      "elapsed": 27675.2,
+      "timestamp": "2026-03-03T00:25:53"
+    },
+    {
+      "type": "trivariate",
+      "triple": [
+        "e",
+        "euler_gamma",
+        "zeta3"
+      ],
+      "triple_symbol": "(e, \u03b3, \u03b6(3))",
+      "degree": 6,
+      "max_coeff": 1000000,
+      "n_monomials": 84,
+      "precision_digits": 1176,
+      "status": "ok",
+      "found_relation": false,
+      "relation": null,
+      "norm_bound": 105125460,
+      "elapsed": 26111.5,
+      "timestamp": "2026-03-03T01:53:30"
+    }
+  ],
+  "total_time_seconds": 54470.6,
+  "timestamp": "2026-03-03T01:53:30"
+}
