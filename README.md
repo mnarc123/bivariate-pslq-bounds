@@ -1,194 +1,138 @@
-# OrganoChron
+# Polynomial PSLQ Bounds — Bivariate and Trivariate
 
-**A Causal Inter-Organ Crosstalk Map Reveals Aging Pacemaker Organs and Cascade Drug Repurposing Targets**
+Systematic computational search for polynomial relations among fundamental transcendental constants, using the PSLQ integer relation algorithm with arbitrary-precision arithmetic.
 
-[![DOI](https://zenodo.org/badge/DOI/PLACEHOLDER.svg)](https://doi.org/PLACEHOLDER)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+**Companion code for:** M. Narcisi, *Computational Bounds on Polynomial Relations Among Fundamental Transcendental Constants: Bivariate, Trivariate, and Statistical Evidence*, arXiv:XXXX.XXXXX (2026).
 
----
+## Main results
 
-## Overview
+**1,811 PSLQ runs. Zero non-trivial relations found.**
 
-OrganoChron is a computational framework that constructs a **causal directed graph of inter-organ aging crosstalk** in humans and uses it for **drug repurposing**. It integrates transcriptomic aging signatures from GTEx v8 (26 tissues, 944 subjects) with secretome-mediated communication networks, causal discovery (PC algorithm + LiNGAM), and LINCS L1000 drug perturbation profiles to:
+No polynomial relation was found among any of the 19 bivariate pairs or 10 trivariate triples drawn from {π, e, γ, ζ(3), G, Ω, ζ(5), A, ln 2}.
 
-1. **Map tissue-specific aging programs** — identify age-associated genes and co-expression modules (WGCNA) across 26 human tissues
-2. **Build a causal inter-organ graph** — infer directional aging cascades using constraint-based and functional causal discovery on cross-tissue Aging Acceleration correlations
-3. **Discover a broadcaster–receiver hierarchy** — the causal graph partitions tissues into 17 aging broadcasters (metabolically active, secretory) and 9 pure receivers (post-mitotic organs including brain and heart)
-4. **Identify pacemaker organs** — thyroid emerges as the dominant aging pacemaker (Hub Score = 0.654, bootstrap top-3 frequency = 100%)
-5. **Score drugs for cascade reversal potential** — the Cascade Reversal Score (CRS) quantifies a drug's ability to reverse aging not only in its target tissue but also in downstream organs through the causal graph
+### Bivariate exclusion bounds (top 3 pairs)
 
-### Key findings
+| Pair    | Max degree (‖c‖∞ ≤ 100) | Max degree (‖c‖∞ ≤ 10⁶) |
+|---------|:------------------------:|:------------------------:|
+| (π, γ)  | 40                       | 32                       |
+| (e, γ)  | 40                       | 32                       |
+| (π, e)  | 39                       | 32                       |
 
-- **Broadcaster–receiver hierarchy**: peripheral metabolic tissues (thyroid, adipose, intestine) causally drive aging in post-mitotic organs (brain, heart) — challenging the prevailing view that the hypothalamus is the master regulator of systemic aging
-- **Drug validation**: 7 of the top-20 CRS-ranked drugs are independently present in the DrugAge database of lifespan-extending compounds (hypergeometric *p* = 8.7 × 10⁻⁵), including metformin, aspirin, dasatinib, and captopril
-- **Robust graph topology**: cross-validation Jaccard = 0.684; permutation test: 97 real edges vs. 8.78 permuted (*p* < 10⁻⁴)
+### Trivariate exclusion bounds (top 4 triples)
 
-## Pipeline architecture
+| Triple            | Max degree (all tiers) | ‖m‖₂ ≥          |
+|-------------------|:----------------------:|:----------------:|
+| (π, e, γ)         | 6                      | 1.05 × 10⁸      |
+| (π, e, ζ(3))      | 6                      | 1.06 × 10⁸      |
+| (π, γ, ζ(3))      | 6                      | 1.19 × 10⁸      |
+| (e, γ, ζ(3))      | 6                      | 1.05 × 10⁸      |
 
-```
-Phase 0  ──  Data acquisition (GTEx v8, STRING v12, LINCS L1000, DrugBank, GenAge/DrugAge)
-Phase 1  ──  Tissue-specific aging signatures + WGCNA modules + Tissue Aging Scores
-Phase 2  ──  Secretome-mediated inter-organ communication graph
-Phase 2b ──  Causal discovery (PC + LiNGAM consensus)
-Phase 3  ──  Pacemaker identification (centrality + cascade simulation + bootstrap)
-Phase 4  ──  Cascade drug repurposing (Reversal Score × graph propagation → CRS)
-Phase 5  ──  Validation (CV, held-out, GenAge GSEA, DrugAge overlap, sex-stratified, permutation)
-Phase 6  ──  Figure generation
-```
+### Extended analyses
 
-## Repository structure
+- **Near-miss analysis:** 138 vectors extracted from PSLQ's B-matrix; mean λ = 0.806, no anomalous cancellation (λ < 0.5).
+- **Statistical comparison:** KS, Anderson–Darling, Mann–Whitney tests vs. 30 pseudo-generic baseline pairs; all p > 0.05.
+- **Exclusion frontiers:** Visualized in the (degree, height) plane for all 19 pairs.
+- **Conjecture connections:** Each bound mapped to Schanuel's conjecture, conjectured irrationality of γ, or odd zeta independence.
 
-```
-organochron/
-├── config/
-│   └── config.yaml              # All configurable parameters
-├── src/
-│   ├── data_acquisition.py      # Download and preprocess public datasets
-│   ├── aging_signatures.py      # Phase 1: aging genes, WGCNA, TAS
-│   ├── secretome_network.py     # Phase 2: secretome inter-organ graph
-│   ├── causal_discovery.py      # Phase 2b: PC + LiNGAM causal inference
-│   ├── hub_analysis.py          # Phase 3: pacemaker identification
-│   ├── drug_repurposing.py      # Phase 4: CRS computation
-│   ├── validation.py            # Phase 5: all validation analyses
-│   ├── visualization.py         # Phase 6: figure generation
-│   └── utils.py                 # Shared utilities
-├── main.py                      # Pipeline orchestrator
-├── tests/
-│   └── test_pipeline.py         # Unit tests (28 tests)
-├── paper/
-│   ├── manuscript.tex           # LaTeX manuscript (Nature Aging format)
-│   └── figures/                 # Publication figures (300 DPI)
-├── results/
-│   ├── figures/                 # Generated figures
-│   ├── tables/                  # Supplementary tables (CSV)
-│   └── stats/                   # JSON summaries per phase
-├── requirements.txt
-├── LICENSE
-└── README.md
-```
+Full results in the paper and in [`results/deep_v2/REPORT_DEEP_V2.md`](results/deep_v2/REPORT_DEEP_V2.md).
 
 ## Requirements
 
-### Hardware
-- **Minimum**: 32 GB RAM, 8-core CPU, 200 GB disk
-- **Recommended** (as used in the paper): 64 GB DDR5, Intel i7-12700F (12C/20T), 500 GB disk
-- **GPU** (optional): AMD RX 7900 XTX or NVIDIA GPU for PyTorch acceleration
-
-### Software
-- Python 3.11+
-- Debian/Ubuntu Linux (tested on Debian 13 Trixie)
-
-## Installation
+- Python ≥ 3.10
+- [mpmath](https://mpmath.org/) ≥ 1.3.0
+- [gmpy2](https://github.com/aleaxit/gmpy) ≥ 2.1 (provides fast GMP-backed arithmetic)
+- [SymPy](https://www.sympy.org/) ≥ 1.12
+- numpy, scipy, matplotlib
 
 ```bash
-git clone https://github.com/[username]/organochron.git
-cd organochron
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+python3 -m venv env && source env/bin/activate
+pip install mpmath sympy gmpy2 numpy scipy matplotlib
 ```
 
-## Usage
-
-### Full pipeline
-```bash
-python main.py
-```
-
-The pipeline runs all phases sequentially (0→5 + figure generation). Each phase saves intermediate results to `results/stats/` as JSON checkpoints, allowing restart from any phase.
-
-### Individual phases
-```bash
-python main.py --phase 1    # Only aging signatures
-python main.py --phase 4    # Only drug repurposing (requires phases 1-3)
-```
-
-### Configuration
-
-All parameters are in `config/config.yaml`. Key settings:
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `aging.spearman_rho_threshold` | 0.15 | Minimum \|ρ\| for Spearman age-correlation |
-| `aging.spearman_fdr_threshold` | 0.05 | FDR threshold for Spearman test |
-| `causal.pc_alpha` | 0.05 | Significance level for PC algorithm |
-| `hub.cascade_damping` | 0.7 | Damping factor for belief propagation |
-| `hub.bootstrap_n` | 200 | Number of bootstrap resamples |
-
-## Data sources
-
-All data are publicly available. The pipeline downloads them automatically (Phase 0).
-
-| Dataset | Source | Size |
-|---------|--------|------|
-| GTEx v8 TPM | [gtexportal.org](https://gtexportal.org) | ~3 GB |
-| GTEx annotations | [gtexportal.org](https://gtexportal.org) | ~50 MB |
-| STRING v12 | [string-db.org](https://string-db.org) | ~400 MB |
-| LINCS L1000 Level 5 | [GEO GSE92742](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE92742) | ~21 GB |
-| Human Protein Atlas (secretome) | [proteinatlas.org](https://www.proteinatlas.org) | ~5 MB |
-| DrugBank (open access) | [drugbank.com](https://go.drugbank.com) | ~200 MB |
-| GenAge / DrugAge | [genomics.senescence.info](https://genomics.senescence.info) | ~2 MB |
-
-**Note**: the LINCS L1000 GCTX file (GSE92742) is ~21 GB compressed. If automatic download fails, download manually and place in `data/raw/`.
-
-## Outputs
-
-### Main results (`results/stats/`)
-- `phase1_summary.json` — Aging gene counts, WGCNA modules per tissue
-- `causal_discovery_summary.json` — PC, LiNGAM, and consensus edge counts
-- `phase3_summary.json` — Pacemaker organs, hub scores, TCI, bootstrap frequencies
-- `phase4_summary.json` — Top drug candidates, CRS scores, DrugAge overlap
-- `phase5_summary.json` — All validation metrics
-- `centrality_comparison.json` — Causal vs. secretome vs. integrated graph centralities
-- `summary_statistics.json` — Pipeline-wide summary
-
-### Figures (`results/figures/`)
-- `figure1.png/pdf` — Framework overview and aging signatures
-- `figure2.png/pdf` — Causal graph and broadcaster–receiver hierarchy
-- `figure3.png/pdf` — Pacemaker cascade simulation
-- `figure4_drug_repurposing_real.png/pdf` — Drug repurposing with real LINCS data
-- `figure5.png/pdf` — Computational validation
-
-### Supplementary tables (`results/tables/`)
-- `supplementary_table_S1.csv` — Tissue summary (samples, aging genes, modules, hub scores)
-- `supplementary_table_S2.csv` — WGCNA aging modules with GO/KEGG enrichment
-- `supplementary_table_S3.csv` — Causal graph edges with confidence scores
-- `supplementary_table_S4.csv` — Top-50 drug candidates with CRS and annotations
-- `supplementary_table_S5.csv` — GenAge enrichment per tissue (Fisher + GSEA)
-
-## Reproducibility
-
-- All random seeds fixed at 42
-- Pipeline version tracked in `summary_statistics.json`
-- Full run time: ~11 minutes on recommended hardware (excluding data download)
-- All intermediate results are checkpointed for exact reproduction
-
-## Tests
+## Quick start
 
 ```bash
-python -m pytest tests/ -v
+# Estimate feasible degrees and runtimes (no computation)
+python3 run_deep_search_v2.py --estimate
+
+# Calibrate the time model on your hardware
+python3 run_deep_search_v2.py --benchmark
+
+# Run the full bivariate search (default: 1 hour per pair)
+python3 run_deep_search_v2.py --max-hours-per-pair 1.0
+
+# Run all extended analyses in parallel (near-miss + baseline + trivariate)
+python3 run_parallel_v2.py
+
+# Run a single pair with extended budget
+python3 run_deep_search_v2.py --pair pi+euler_gamma --max-hours-per-pair 4.0
+
+# Resume after interruption (uses checkpoints)
+python3 run_deep_search_v2.py --resume --max-hours-per-pair 1.0
 ```
 
-28 unit tests covering correlation computation, graph construction, cascade propagation, and synthetic data validation.
+## How it works
+
+For each pair of constants (α, β) and each target degree *d*, the code:
+
+1. Builds the monomial vector **v** = (1, α, β, α², αβ, β², …, β^d) of dimension N(d) = (d+1)(d+2)/2.
+2. Computes **v** at precision p = 2·N·D decimal digits, where D = ⌈log₁₀(M+1)⌉ and M is the coefficient bound (safety factor s = 2.0 over the theoretical minimum).
+3. Calls `mpmath.pslq(v, maxcoeff=M, maxsteps=0)`.
+4. If PSLQ returns `None`: no relation with ‖c‖∞ ≤ M exists at this degree. This is a rigorous bound.
+5. If PSLQ returns a vector: the candidate is verified at 1.5× precision and checked for triviality.
+
+The search proceeds incrementally from degree 9 upward, with three coefficient tiers (10², 10⁴, 10⁶) at each degree, until the time budget is exhausted. Trivariate searches use the same approach with 3-variable monomials.
+
+## Project structure
+
+| File | Description |
+|------|-------------|
+| **Core bivariate search** | |
+| `run_deep_search_v2.py` | Entry point with argument parsing |
+| `deep_engine.py` | Core incremental PSLQ search engine |
+| `precision_manager.py` | Dynamic precision scaling and time estimation |
+| `checkpoint.py` | Checkpoint/resume for long-running searches |
+| `bound_calculator.py` | Rigorous bound formatting |
+| `pslq_bounds_fast.py` | Patched PSLQ with H-matrix and B-matrix extraction |
+| `constants.py` | High-precision constant computation with caching |
+| `config.py` | Search parameters and configuration |
+| **Extended analyses** | |
+| `near_miss_collector.py` | Near-miss vector extraction from B-matrix |
+| `random_baseline.py` | Pseudo-generic baseline generation |
+| `statistical_analysis.py` | KS, AD, MW hypothesis tests and diagnostic plots |
+| `monomials_trivariate.py` | Trivariate monomial generation |
+| `run_trivariate_search.py` | Trivariate PSLQ search engine |
+| `run_parallel_v2.py` | Parallel orchestrator (10 workers) |
+| **Output** | |
+| `results/deep_v2/` | Bivariate bounds, paper, reports |
+| `results/near_misses/` | Near-miss analysis results |
+| `results/statistics/` | Statistical analysis, plots |
+| `results/trivariate/` | Trivariate exclusion bounds |
+| `results/frontiers/` | Exclusion frontier plots (19 individual + comparative) |
+
+## Hardware used in the paper
+
+- CPU: Intel Core i7-12700F (12 cores, 20 threads)
+- RAM: 64 GB DDR5
+- OS: Debian 13
+
+Total computation: ~24 hours wall-clock (10 parallel workers), ~160 CPU-hours, 1,811 PSLQ runs.
 
 ## Citation
 
-If you use OrganoChron in your research, please cite:
-
 ```bibtex
-@article{organochron2025,
-  title={OrganoChron: A Causal Inter-Organ Crosstalk Map Reveals Aging Pacemaker Organs and Cascade Drug Repurposing Targets},
-  author={[Author]},
-  year={2025},
-  doi={PLACEHOLDER}
+@article{Narcisi2026polynomial,
+  author  = {Narcisi, Marco},
+  title   = {Computational Bounds on Polynomial Relations Among
+             Fundamental Transcendental Constants: Bivariate,
+             Trivariate, and Statistical Evidence},
+  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  year    = {2026}
 }
 ```
 
 ## License
 
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
+Code: [MIT License](LICENSE)
 
-## Acknowledgements
-
-This work uses publicly available data from the GTEx Consortium, LINCS/CMap, STRING, Human Protein Atlas, DrugBank, GenAge, and DrugAge. We thank these projects for making their data freely accessible.
+Paper: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
