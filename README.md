@@ -2,7 +2,7 @@
 
 Systematic computational search for polynomial relations among fundamental transcendental constants, using the PSLQ integer relation algorithm with arbitrary-precision arithmetic.
 
-**Companion code for:** M. Narcisi, *Computational Bounds on Polynomial Relations Among Fundamental Transcendental Constants: Bivariate, Trivariate, and Statistical Evidence*, arXiv:XXXX.XXXXX (2026).
+**Companion code for:** M. Narcisi, *Computational Bounds on Polynomial Relations Among Fundamental Transcendental Constants: Bivariate, Trivariate, and Statistical Evidence* (2026).
 
 ## Main results
 
@@ -126,7 +126,6 @@ Total computation: ~24 hours wall-clock (10 parallel workers), ~160 CPU-hours, 1
   title   = {Computational Bounds on Polynomial Relations Among
              Fundamental Transcendental Constants: Bivariate,
              Trivariate, and Statistical Evidence},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
   year    = {2026}
 }
 ```
