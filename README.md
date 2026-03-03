@@ -34,8 +34,6 @@ No polynomial relation was found among any of the 19 bivariate pairs or 10 triva
 - **Exclusion frontiers:** Visualized in the (degree, height) plane for all 19 pairs.
 - **Conjecture connections:** Each bound mapped to Schanuel's conjecture, conjectured irrationality of γ, or odd zeta independence.
 
-Full results in the paper and in [`results/deep_v2/REPORT_DEEP_V2.md`](results/deep_v2/REPORT_DEEP_V2.md).
-
 ## Requirements
 
 - Python ≥ 3.10
